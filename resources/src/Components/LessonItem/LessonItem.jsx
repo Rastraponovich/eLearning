@@ -13,10 +13,7 @@ const styles = theme => ({
     },
   });
 
-
-  
-
-class LessonItem extends Component{
+  class LessonItem extends Component{
 
     handleSelectLesson = () => {
         this.props.handleSelectLesson(this.props.lessonId)
@@ -48,11 +45,11 @@ class LessonItem extends Component{
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" variant="contained" >
                         Купить
                     </Button>
                     <Link className="link" to={ `/lesson/${id}` } replace>
-                        <Button onClick={ this.handleSelectLesson } size="small" color="primary">
+                        <Button onClick={ this.handleSelectLesson } size="small" variant="contained" color="primary">
                             Подробнее
                         </Button>
                     </Link>

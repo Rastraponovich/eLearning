@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu, Avatar } from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Typography, 
+  InputBase, Badge, MenuItem, Menu,    } from '@material-ui/core'
 import Profile from 'components/Profile/Profile'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import MailIcon from '@material-ui/icons/Mail'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import MoreIcon from '@material-ui/icons/MoreVert'
+
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -17,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   }, 
+  
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-    },
+  },
   },
   search: {
     position: 'relative',
@@ -144,7 +147,7 @@ export default function Header(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Toolbar variant="dense">
           <IconButton
             edge="start"
@@ -207,10 +210,10 @@ export default function Header(props) {
             </IconButton>
           </div>
         </Toolbar>
+
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      
     </div>
   );
 }
