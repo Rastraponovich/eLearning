@@ -38,13 +38,12 @@ class App extends Component {
                     <Switch>
                         <Route path='/' exact >
                             <LessonList lessons={ this.props.lessons } handleSelectLesson={ this.handleSelectLesson }/>
-                            
                         </Route>
-                        <Route path='/:id' exact>
+                        <Route path='/login' exact >
+                            <LoginPage />
+                        </Route>
+                        <Route path='/lesson/:id' exact>
                             <LessonContainer />
-                        </Route>
-                        <Route path='/registration' exact >
-                            <Registration />
                         </Route>
                     </Switch>
                     <AlertShow 

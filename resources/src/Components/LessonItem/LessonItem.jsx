@@ -51,7 +51,7 @@ class LessonItem extends Component{
                     <Button size="small" color="primary">
                         Купить
                     </Button>
-                    <Link className="link" to={ `/${id}` } replace>
+                    <Link className="link" to={ `/lesson/${id}` } replace>
                         <Button onClick={ this.handleSelectLesson } size="small" color="primary">
                             Подробнее
                         </Button>
