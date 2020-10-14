@@ -11,17 +11,16 @@ class Lesson extends Component{
        
         const { id, category, content, title, price, cover } = this.props.lesson
         return(
-            <Container fluid>
-                <Paper elevation={10}>
-                    <h2>{ title }</h2>
-                    <Typography>{id}</Typography>
-                    <Typography>{category}</Typography>
-                    <Typography>{content}</Typography>
-                    <Typography>{price}</Typography>
-                    <Typography>{cover}</Typography>
+            
+            <Paper elevation={10}>
+                <h2>{ title }</h2>
+                <Typography>{id}</Typography>
+                <Typography>{category}</Typography>
+                <Typography>{content}</Typography>
+                <Typography>{price}</Typography>
+                <Typography>{cover}</Typography>
 
-                </Paper>
-            </Container>
+            </Paper>
             
         )
     }

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Container } from '@material-ui/core'
 import { connect } from 'react-redux'
 import Lesson from 'components/Lesson/Lesson'
 import { lessonsLoadAction } from 'actions/lessons'
@@ -9,7 +10,10 @@ class LessonContainerClass extends Component {
         const currentLesson = this.props.lessons[this.props.lessonId]
         return(
             <>
+            <Container maxWidth="md">
                 <Lesson lesson={ currentLesson } />
+            </Container>
+               
             </>
         )
     }
