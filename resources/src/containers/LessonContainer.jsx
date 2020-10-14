@@ -3,6 +3,8 @@ import { Container } from '@material-ui/core'
 import { connect } from 'react-redux'
 import Lesson from 'components/Lesson/Lesson'
 import { lessonsLoadAction } from 'actions/lessons'
+import ScrollableFeed from 'react-scrollable-feed'
+
 
 class LessonContainerClass extends Component {
     render(){
@@ -11,7 +13,10 @@ class LessonContainerClass extends Component {
         return(
             <>
             <Container maxWidth="md">
-                <Lesson lesson={ currentLesson } />
+                <ScrollableFeed>
+                    <Lesson lesson={ currentLesson } />
+                </ScrollableFeed>
+               
             </Container>
                
             </>

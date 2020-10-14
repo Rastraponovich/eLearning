@@ -155,7 +155,7 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
           <Link to='/' replace>
-            <Typography className={classes.title} variant="h6" noWrap>
+            <Typography className={classes.title} variant="h6" noWrap component="h2">
               {props.title}
             </Typography>
           </Link>

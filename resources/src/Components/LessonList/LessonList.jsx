@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core'
 import { withStyles  } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import LessonItem from 'components/LessonItem/LessonItem'
+import ScrollableFeed from 'react-scrollable-feed'
 
 const styles = theme => ({
     root: {
