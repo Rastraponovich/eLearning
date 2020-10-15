@@ -69,7 +69,7 @@ class AppContainerClass extends Component {
     render() {
         return (
             <ConnectedRouter history={ history }>     
-                <App 
+                <App
                     { ...this.props } 
                     handleSelectLesson={this.props.selectLessonAction} 
                     handleCreateLesson={this.handleCreateLesson} />

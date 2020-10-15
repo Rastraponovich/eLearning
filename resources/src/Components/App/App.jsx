@@ -4,6 +4,7 @@ import '../../layout/css/style.css'
 import { Container, Grid } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
 import Navigation from 'components/Navigation/Navigation'
+import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
 import { LessonContainer } from 'containers/LessonContainer'
 import Header from 'components/Header/Header'
@@ -35,14 +36,17 @@ class App extends Component {
                 <Header 
                     title={ this.state.title } 
                     profile={ this.props.profile }/>
-                <Grid container sapcing={2} alignItems="stretch">
+                <Grid container sapcing={2} alignItems="stretch" >
                     <Grid container item xs={2} >
                         <Navigation />
                     </Grid>
                     <Grid container item xs={10} justify="center" >
-                        <main>
+                        <Container>
                             <Switch>
-                                <Route path='/' exact >
+                            <Route path='/' exact >
+                                    <MainPage />
+                                </Route>
+                                <Route path='/lessons' exact >
                                     <LessonList lessons={ this.props.lessons } handleSelectLesson={ this.handleSelectLesson }/>
                                 </Route>
                                 <Route path='/login' exact >
@@ -61,7 +65,7 @@ class App extends Component {
                             <AlertShow 
                                 popup={ this.props.popup } 
                                 hanldeCloseAlert={ this.hanldeCloseAlert } />
-                        </main>
+                        </Container>
                     </Grid>
                 </Grid>
               </Fragment>

@@ -81,7 +81,6 @@ export default function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -105,7 +104,7 @@ export default function Header(props) {
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <>
-      <Menu>
+      <Menu >
         <Profile profile={ props.profile }/>
       </Menu>
     </>
