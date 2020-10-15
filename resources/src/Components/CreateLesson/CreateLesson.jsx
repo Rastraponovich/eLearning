@@ -47,8 +47,8 @@ class CreateLesson extends Component{
         content: '',
         categories: ['Первая', 'Вторая', 'Третья', 'Четвертая'],
         price: '',
-        image: '',
-        SelectedCategory: '',
+        cover: '',
+        category: '',
     }
 
     componentDidMount() {
@@ -62,7 +62,7 @@ class CreateLesson extends Component{
     }
 
     handleChangeCaterogy = (event) => {
-        this.setState({ SelectedCategory: event.target.value })
+        this.setState({ category: event.target.value })
     }
 
     handleChangePrice = (event) => {
@@ -82,18 +82,27 @@ class CreateLesson extends Component{
     }
 
     handleConfirm = () => {
-        const { id, title, content, price, image, SelectedCategory } = this.state
-        if (title !== '' && content !== '' && price !== '' && SelectedCategory !== '' ) {
-            alert('all rights')
+        const { id, title, content, price, category } = this.state
+        let cover = this.state.cover === '' ? BULK_IMAGE : this.state.cover
+        
+        if (title !== '' && content !== '' && price !== '' && category !== '' ) {
+            this.props.handleCreateLesson({
+                id,
+                title,
+                cover,
+                content,
+                price,
+                category,
+                lessonId: id
+            }) 
         } else {
             alert('что-то не заполнено')
         }
-        // this.props.createLesson()
     }
 
     render(){
         const { classes } = this.props
-        const { title, content, categories, price, image, SelectedCategory } = this.state
+        const { title, content, categories, price, cover, category } = this.state
         return(
             <Container >
                 <Paper elevation={10} className={ classes.root }>
@@ -127,7 +136,7 @@ class CreateLesson extends Component{
                                     id="category"
                                     size="small" 
                                     select
-                                    value={ SelectedCategory }
+                                    value={ category }
                                     onChange={ this.handleChangeCaterogy }
                                     fullWidth 
                                     helperText="Выберите категорию урока"
@@ -176,7 +185,7 @@ class CreateLesson extends Component{
                             </Paper>
                             <CardMedia
                                 className={classes.media}
-                                image={ image === '' ? BULK_IMAGE : image }
+                                image={ cover === '' ? BULK_IMAGE : cover }
                                 title="Contemplative Reptile"
                             />
                             <div className={ classes.imageUpload }>

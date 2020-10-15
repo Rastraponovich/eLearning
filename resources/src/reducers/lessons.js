@@ -15,10 +15,14 @@ export const lessonReducer = (state = initialState, action) => {
             return { ...state, lessons }
 
         case LESSON_CREATE:
+            console.log(action.payload)
             return update(state, {
                 lessons: {
-                    [action.payload.lessonId]: {
-                        $merge: { ...action.payload.lesson }
+                    $merge: {
+                        [action.payload.data.id]: {
+                            ...action.payload.data,
+                            author: action.payload.author.firstName + ' ' + action.payload.author.lastName
+                        }
                     }
                 },
             })

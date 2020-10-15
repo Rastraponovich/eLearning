@@ -6,7 +6,6 @@ import { PROFILE_LOAD, PROFILE_CHANGE_NAME } from 'actions/profile'
 
 const initialState = {
     profile: [],
-    users: []
 }
 
 export const profileReducer = (state = initialState, action) => {

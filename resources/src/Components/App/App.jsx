@@ -52,7 +52,7 @@ class App extends Component {
                                     <LessonContainer />
                                 </Route>
                                 <Route path='/createLesson' exact>
-                                    <CreateLesson />
+                                    <CreateLesson handleCreateLesson={this.props.handleCreateLesson} />
                                 </Route>
                                 <Route path='*'>
                                     <h2>Error</h2>
