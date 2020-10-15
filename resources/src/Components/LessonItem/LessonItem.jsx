@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react'
 import { withStyles  } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core'
+import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button, Dialog } from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -15,15 +15,28 @@ const styles = theme => ({
 
   class LessonItem extends Component{
 
+    state = {
+        open: false
+    }
+
+    handleOpen = () => {
+        this.setState({ open: !this.state.open })
+    }
+
     handleSelectLesson = () => {
         this.props.handleSelectLesson(this.props.lessonId)
+    }
+
+    handleClose = () => {
+        this.setState( { open: false } )
     }
     
     render() {
         const { id, title, content, category, price, cover, classes, lessonId } = this.props
         return(
+            <>
             <Card elevation={5} key={id}>
-                <CardActionArea>
+                <CardActionArea onClick={this.props.modal ? this.handleClose : this.handleOpen}>
                     <CardMedia
                         className={classes.media}
                         image={ cover }
@@ -55,6 +68,10 @@ const styles = theme => ({
                     </Link>
                 </CardActions>
             </Card>
+            <Dialog fullWidth onClose={ this.handleClose } open={ this.state.open }>
+                <LessonItem { ...this.props } modal={true} />
+            </Dialog>
+            </>
         )
     }
 }

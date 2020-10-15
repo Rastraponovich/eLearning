@@ -4,6 +4,7 @@ import { withStyles  } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import LessonItem from 'components/LessonItem/LessonItem'
 import ScrollableFeed from 'react-scrollable-feed'
+import ModalComponent from 'components/ModalComponent/ModalComponent'
 
 const styles = theme => ({
     root: {
