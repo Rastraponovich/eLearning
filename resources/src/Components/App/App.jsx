@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import '../../layout/css/style.css'
-import { nanoid } from 'nanoid'
+import { Container, Grid } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
+import Navigation from 'components/Navigation/Navigation'
+import CreateLesson from 'components/CreateLesson/CreateLesson'
 import { LessonContainer } from 'containers/LessonContainer'
 import Header from 'components/Header/Header'
 import AlertShow from 'components/AlertShow/AlertShow'
-import Registration from 'components/Registration/Registration'
 import LoginPage from 'components/LoginPage/LoginPage'
 
 class App extends Component {
@@ -34,23 +35,36 @@ class App extends Component {
                 <Header 
                     title={ this.state.title } 
                     profile={ this.props.profile }/>
-                <main>
-                    <Switch>
-                        <Route path='/' exact >
-                            <LessonList lessons={ this.props.lessons } handleSelectLesson={ this.handleSelectLesson }/>
-                        </Route>
-                        <Route path='/login' exact >
-                            <LoginPage />
-                        </Route>
-                        <Route path='/lesson/:id' exact>
-                            <LessonContainer />
-                        </Route>
-                    </Switch>
-                    <AlertShow 
-                        popup={ this.props.popup } 
-                        hanldeCloseAlert={ this.hanldeCloseAlert } />
-                </main>
-            </Fragment>
+                <Grid container sapcing={2} alignItems="stretch">
+                    <Grid container item xs={2} >
+                        <Navigation />
+                    </Grid>
+                    <Grid container item xs={10} justify="center" >
+                        <main>
+                            <Switch>
+                                <Route path='/' exact >
+                                    <LessonList lessons={ this.props.lessons } handleSelectLesson={ this.handleSelectLesson }/>
+                                </Route>
+                                <Route path='/login' exact >
+                                    <LoginPage />
+                                </Route>
+                                <Route path='/lesson/:id' exact>
+                                    <LessonContainer />
+                                </Route>
+                                <Route path='/createLesson' exact>
+                                    <CreateLesson />
+                                </Route>
+                                <Route path='*'>
+                                    <h2>Error</h2>
+                                </Route>
+                            </Switch>
+                            <AlertShow 
+                                popup={ this.props.popup } 
+                                hanldeCloseAlert={ this.hanldeCloseAlert } />
+                        </main>
+                    </Grid>
+                </Grid>
+              </Fragment>
         )
     }
 }
