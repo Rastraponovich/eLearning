@@ -17,19 +17,19 @@ class Navigation extends Component{
         return(
             <Paper elevation={5} square>
             <List component="nav" className={classes.root}>
-                <Link to='/login' replace>
-                    <ListItem button>
-                        <ListItemText primary="Login Page" />
-                    </ListItem>
-                </Link>
                 <Link to='/' replace>
                     <ListItem button>
-                        <ListItemText primary="Main" />
+                        <ListItemText primary="Главная страница" />
+                    </ListItem>
+                </Link>
+                <Link to='/login' replace>
+                    <ListItem button>
+                        <ListItemText primary="Авторизация" />
                     </ListItem>
                 </Link>
                 <Link to='/createLesson' replace>
                     <ListItem button>
-                        <ListItemText primary="CreateLesson" />
+                        <ListItemText primary="Создание урока" />
                     </ListItem>
                 </Link>
             </List>
