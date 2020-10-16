@@ -2,15 +2,16 @@ import React, { Fragment } from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, IconButton, Typography, 
-  InputBase, Badge, MenuItem, Menu,    } from '@material-ui/core'
+  InputBase, Badge, MenuItem, Menu, Drawer, Divider } from '@material-ui/core'
 import Profile from 'components/Profile/Profile'
+import Navigation from 'components/Navigation/Navigation'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
 
-const drawerWidth = 240
+const drawerWidth = 150
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -19,7 +20,17 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   }, 
-  
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -81,7 +92,6 @@ export default function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -105,7 +115,7 @@ export default function Header(props) {
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <>
-      <Menu>
+      <Menu >
         <Profile profile={ props.profile }/>
       </Menu>
     </>
@@ -147,7 +157,7 @@ export default function Header(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" >
+      <AppBar position="fixed" className={classes.appBar} >
         <Toolbar variant="dense">
           <IconButton
             edge="start"
@@ -214,6 +224,16 @@ export default function Header(props) {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Drawer
+          className={ classes.drawer }
+          variant="permanent"
+          classes={{ paper: classes.drawerPaper }}
+          anchor="left"
+        >
+          <div className={ classes.toolbar } />
+          <Divider />
+          <Navigation />
+      </Drawer>
     </div>
   );
 }

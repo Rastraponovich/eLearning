@@ -1,9 +1,10 @@
 import React, { Fragment, Component } from 'react'
 import { Grid } from '@material-ui/core'
 import { withStyles  } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
+import { Typography, Divider } from '@material-ui/core'
 import LessonItem from 'components/LessonItem/LessonItem'
 import ScrollableFeed from 'react-scrollable-feed'
+import ModalComponent from 'components/ModalComponent/ModalComponent'
 
 const styles = theme => ({
     root: {
@@ -16,6 +17,9 @@ const styles = theme => ({
     control: {
         padding: theme.spacing(2),
     },
+    spacing: {
+        margin: theme.spacing(0, 0, 2, 0)
+    }
 })
 
 class LessonList extends Component{
@@ -35,11 +39,17 @@ class LessonList extends Component{
         
         return(
             <>
-                <h2>Список Уроков</h2>
+                <Typography className={ classes.spacing } component="h2" variant="h4">Список Уроков</Typography>
+                <Divider className={ classes.spacing } />
                 <Grid container className={classes.root} spacing={2}>
                     { lessonsItems.map((item) => 
-                        <Grid item xs={4} key={item}>
-                            <LessonItem key={item} { ...lessons[item] } lessonId={item} handleSelectLesson={this.handleSelectLesson} /> 
+                        <Grid item xs={12} sm={6} md={4} key={item}>
+                            <LessonItem 
+                            key={item.id} 
+                            { ...lessons[item] } 
+                            lessonId={item} 
+                            handleDeleteItem={ this.props.handleDeleteItem }
+                            handleSelectLesson={ this.handleSelectLesson } /> 
                         </Grid>
                         )}
                 </Grid>

@@ -1,13 +1,25 @@
 import React, { Component, Fragment } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import '../../layout/css/style.css'
-import { nanoid } from 'nanoid'
+import { Container, Grid } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
+import Navigation from 'components/Navigation/Navigation'
+import MainPage from 'components/MainPage/MainPage'
+import CreateLesson from 'components/CreateLesson/CreateLesson'
 import { LessonContainer } from 'containers/LessonContainer'
 import Header from 'components/Header/Header'
 import AlertShow from 'components/AlertShow/AlertShow'
-import Registration from 'components/Registration/Registration'
 import LoginPage from 'components/LoginPage/LoginPage'
+import { withStyles } from '@material-ui/core/styles'
+
+const drawerWidth = 150
+
+const styles = theme => ({
+    main: {
+        marginTop: 70,
+        marginLeft: drawerWidth,
+    },
+})
 
 class App extends Component {
 
@@ -28,30 +40,49 @@ class App extends Component {
         this.props.handleShowAlert({ value, type, isSelect, messageId })
     }
 
-    render(){
+    render() {
+        const { classes } = this.props
         return(
             <Fragment>     
                 <Header 
                     title={ this.state.title } 
                     profile={ this.props.profile }/>
-                <main>
-                    <Switch>
-                        <Route path='/' exact >
-                            <LessonList lessons={ this.props.lessons } handleSelectLesson={ this.handleSelectLesson }/>
-                        </Route>
-                        <Route path='/login' exact >
-                            <LoginPage />
-                        </Route>
-                        <Route path='/lesson/:id' exact>
-                            <LessonContainer />
-                        </Route>
-                    </Switch>
-                    <AlertShow 
-                        popup={ this.props.popup } 
-                        hanldeCloseAlert={ this.hanldeCloseAlert } />
+                <main className={ classes.main }>
+                <Grid container  alignItems="stretch" >
+                    <Grid container item xs={12} justify="center" >
+                        <Container style={{ height: '88vh' }} fullWidth>
+                            <Switch>
+                            <Route path='/' exact >
+                                    <MainPage />
+                                </Route>
+                                <Route path='/lessons' exact >
+                                    <LessonList 
+                                    lessons={ this.props.lessons } 
+                                    handleDeleteItem={ this.props.handleDeleteItem }
+                                    handleSelectLesson={ this.handleSelectLesson }/>
+                                </Route>
+                                <Route path='/login' exact >
+                                    <LoginPage />
+                                </Route>
+                                <Route path='/lesson/:id' exact>
+                                    <LessonContainer />
+                                </Route>
+                                <Route path='/createLesson' exact>
+                                    <CreateLesson handleCreateLesson={this.props.handleCreateLesson} handleRedirect={ this.props.handleRedirect } />
+                                </Route>
+                                <Route path='*'>
+                                    <h2>Error</h2>
+                                </Route>
+                            </Switch>
+                            <AlertShow 
+                                popup={ this.props.popup } 
+                                hanldeCloseAlert={ this.hanldeCloseAlert } />
+                        </Container>
+                    </Grid>
+                </Grid>
                 </main>
-            </Fragment>
+              </Fragment>
         )
     }
 }
-export default App 
+export default withStyles(styles)(App)

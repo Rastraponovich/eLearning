@@ -6,7 +6,7 @@ import { history } from '../store'
 import App from 'components/App/App'
 import { alertLoadAction, alertCloseInformAction, alertSendInformAction } from 'actions/alerts'
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
-import { lessonsLoadAction, selectLessonAction } from 'actions/lessons'
+import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
 
 
 class AppContainerClass extends Component {
@@ -15,20 +15,29 @@ class AppContainerClass extends Component {
         const { 
             profile, 
             popup, 
+            lessons,
             alertLoadAction, 
             profileLoadAction,
             lessonsLoadAction, 
         } = this.props
         
-        if (!profile.length || !popup.length || !lessons.length ) {
+        if (!Object.keys(lessons).length) {
             lessonsLoadAction()
+        }
+
+        if (!profile.length || !popup.length) {
             profileLoadAction()
             alertLoadAction()
         }
     }
+
     handleSelectLesson = (id) => {
         this.props.selectLessonAction(id)
     }
+    handleCreateLesson = (data) => {
+        this.props.createLessonAction({ author: this.props.profile, data: data })
+    }
+    
 
     // handleDelete = (data) => {
     //     this.props.chatsMessageDeleteInformAction(data)
@@ -53,14 +62,27 @@ class AppContainerClass extends Component {
         this.props.alertCloseInformAction(value)
     }
 
+    handleDeleteItem = (data) => {
+        console.log(data)
+        this.props.deleteLesonAction(data)
+    }
     // handleNameChange = (value) => {
     //     this.props.profileChangeNameAction(value)
     // }
+    
+    handleRedirect = (path) => {
+        this.props.redirect('lessons')
+    }
 
     render() {
         return (
             <ConnectedRouter history={ history }>     
-                <App { ...this.props } handleSelectLesson={this.props.selectLessonAction}/>
+                <App
+                    { ...this.props } 
+                    handleRedirect={ this.handleRedirect }
+                    handleDeleteItem={ this.handleDeleteItem }
+                    handleSelectLesson={ this.props.selectLessonAction } 
+                    handleCreateLesson={ this.handleCreateLesson } />
             </ConnectedRouter>
         )
     }
@@ -89,8 +111,10 @@ const mapDispatchToProps = (dispatch) => {
         alertCloseInformAction: (value) => dispatch(alertCloseInformAction(value)),
         alertSendInformAction: (data) => dispatch(alertSendInformAction(data)),
         lessonsLoadAction: () => dispatch(lessonsLoadAction()),
-        selectLessonAction: (id) => dispatch(selectLessonAction(id))
-        // redirect: (value) => dispatch(push(`/${value}`)),
+        selectLessonAction: (id) => dispatch(selectLessonAction(id)),
+        createLessonAction: (data) => dispatch(createLessonAction(data)),
+        deleteLesonAction: (data) => dispatch(deleteLesonAction(data)),
+        redirect: (value) => dispatch(push(`/${value}`)),
     }
 }
 

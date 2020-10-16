@@ -7,14 +7,14 @@ export const lessonsLoadAction = () => ({
     type: LESSON_LOAD,
 })
 
-export const lessonCreateAction = (lesson, lessonId) => ({
+export const createLessonAction = (data) => ({
     type: LESSON_CREATE,
-    payload: { lesson, lessonId }
+    payload: data
 })
 
-export const lessonDeleteAction = (lesson, lessonId) => ({
+export const deleteLesonAction = (id) => ({
     type: LESSON_DELETE,
-    payload: { lesson, lessonId }
+    payload: id
 })
 
 export const selectLessonAction = (id) => ({
