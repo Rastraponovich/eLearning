@@ -10,6 +10,16 @@ import { LessonContainer } from 'containers/LessonContainer'
 import Header from 'components/Header/Header'
 import AlertShow from 'components/AlertShow/AlertShow'
 import LoginPage from 'components/LoginPage/LoginPage'
+import { withStyles } from '@material-ui/core/styles'
+
+const drawerWidth = 150
+
+const styles = theme => ({
+    main: {
+        marginTop: 70,
+        marginLeft: drawerWidth,
+    },
+})
 
 class App extends Component {
 
@@ -30,17 +40,16 @@ class App extends Component {
         this.props.handleShowAlert({ value, type, isSelect, messageId })
     }
 
-    render(){
+    render() {
+        const { classes } = this.props
         return(
             <Fragment>     
                 <Header 
                     title={ this.state.title } 
                     profile={ this.props.profile }/>
+                <main className={ classes.main }>
                 <Grid container  alignItems="stretch" >
-                    <Grid container item xs={2} >
-                        <Navigation />
-                    </Grid>
-                    <Grid container item xs={10} justify="center" >
+                    <Grid container item xs={12} justify="center" >
                         <Container style={{ height: '88vh' }} fullWidth>
                             <Switch>
                             <Route path='/' exact >
@@ -71,8 +80,9 @@ class App extends Component {
                         </Container>
                     </Grid>
                 </Grid>
+                </main>
               </Fragment>
         )
     }
 }
-export default App 
+export default withStyles(styles)(App)

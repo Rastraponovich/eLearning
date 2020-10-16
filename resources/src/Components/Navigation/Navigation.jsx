@@ -6,7 +6,6 @@ import { List, ListItem, ListItemText, Paper, Typography } from '@material-ui/co
 const styles = theme => ({
     root: {
         width: '100%',
-        maxWidth: 200,
         backgroundColor: theme.palette.background.paper,
         fontSize: '12px',
     },
@@ -23,7 +22,6 @@ class Navigation extends Component{
     render() {
         const { classes } = this.props
         return(
-            <Paper elevation={5} square>
             <List component="nav" className={classes.root}>
                 <Link className={classes.link} to='/' replace>
                     <ListItem button>
@@ -78,7 +76,6 @@ class Navigation extends Component{
                     </ListItem>
                 </Link>
             </List>
-            </Paper>
         )
     }
 }

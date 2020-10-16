@@ -16,6 +16,7 @@ const styles = theme => ({
     },
     cardAction: {
         width: '100%',
+        padding: theme.spacing(0, 1),
         justifyContent: 'center',
     },
   });
