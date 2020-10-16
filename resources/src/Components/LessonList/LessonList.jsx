@@ -43,8 +43,13 @@ class LessonList extends Component{
                 <Divider className={ classes.spacing } />
                 <Grid container className={classes.root} spacing={2}>
                     { lessonsItems.map((item) => 
-                        <Grid item xs={4} key={item}>
-                            <LessonItem key={item} { ...lessons[item] } lessonId={item} handleSelectLesson={this.handleSelectLesson} /> 
+                        <Grid item xs={12} sm={6} md={4} key={item}>
+                            <LessonItem 
+                            key={item.id} 
+                            { ...lessons[item] } 
+                            lessonId={item} 
+                            handleDeleteItem={ this.props.handleDeleteItem }
+                            handleSelectLesson={ this.handleSelectLesson } /> 
                         </Grid>
                         )}
                 </Grid>

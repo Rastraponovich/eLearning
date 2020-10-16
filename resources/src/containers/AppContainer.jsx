@@ -6,7 +6,7 @@ import { history } from '../store'
 import App from 'components/App/App'
 import { alertLoadAction, alertCloseInformAction, alertSendInformAction } from 'actions/alerts'
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
-import { lessonsLoadAction, selectLessonAction, createLessonAction } from 'actions/lessons'
+import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
 
 
 class AppContainerClass extends Component {
@@ -62,17 +62,27 @@ class AppContainerClass extends Component {
         this.props.alertCloseInformAction(value)
     }
 
+    handleDeleteItem = (data) => {
+        console.log(data)
+        this.props.deleteLesonAction(data)
+    }
     // handleNameChange = (value) => {
     //     this.props.profileChangeNameAction(value)
     // }
+    
+    handleRedirect = (path) => {
+        this.props.redirect('lessons')
+    }
 
     render() {
         return (
             <ConnectedRouter history={ history }>     
                 <App
                     { ...this.props } 
-                    handleSelectLesson={this.props.selectLessonAction} 
-                    handleCreateLesson={this.handleCreateLesson} />
+                    handleRedirect={ this.handleRedirect }
+                    handleDeleteItem={ this.handleDeleteItem }
+                    handleSelectLesson={ this.props.selectLessonAction } 
+                    handleCreateLesson={ this.handleCreateLesson } />
             </ConnectedRouter>
         )
     }
@@ -102,8 +112,9 @@ const mapDispatchToProps = (dispatch) => {
         alertSendInformAction: (data) => dispatch(alertSendInformAction(data)),
         lessonsLoadAction: () => dispatch(lessonsLoadAction()),
         selectLessonAction: (id) => dispatch(selectLessonAction(id)),
-        createLessonAction: (data) => dispatch(createLessonAction(data))
-        // redirect: (value) => dispatch(push(`/${value}`)),
+        createLessonAction: (data) => dispatch(createLessonAction(data)),
+        deleteLesonAction: (data) => dispatch(deleteLesonAction(data)),
+        redirect: (value) => dispatch(push(`/${value}`)),
     }
 }
 

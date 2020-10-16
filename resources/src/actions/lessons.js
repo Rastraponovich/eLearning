@@ -12,9 +12,9 @@ export const createLessonAction = (data) => ({
     payload: data
 })
 
-export const lessonDeleteAction = (lesson, lessonId) => ({
+export const deleteLesonAction = (id) => ({
     type: LESSON_DELETE,
-    payload: { lesson, lessonId }
+    payload: id
 })
 
 export const selectLessonAction = (id) => ({

@@ -36,18 +36,21 @@ class App extends Component {
                 <Header 
                     title={ this.state.title } 
                     profile={ this.props.profile }/>
-                <Grid container sapcing={2} alignItems="stretch" >
+                <Grid container  alignItems="stretch" >
                     <Grid container item xs={2} >
                         <Navigation />
                     </Grid>
                     <Grid container item xs={10} justify="center" >
-                        <Container>
+                        <Container style={{ height: '88vh' }} fullWidth>
                             <Switch>
                             <Route path='/' exact >
                                     <MainPage />
                                 </Route>
                                 <Route path='/lessons' exact >
-                                    <LessonList lessons={ this.props.lessons } handleSelectLesson={ this.handleSelectLesson }/>
+                                    <LessonList 
+                                    lessons={ this.props.lessons } 
+                                    handleDeleteItem={ this.props.handleDeleteItem }
+                                    handleSelectLesson={ this.handleSelectLesson }/>
                                 </Route>
                                 <Route path='/login' exact >
                                     <LoginPage />
@@ -56,7 +59,7 @@ class App extends Component {
                                     <LessonContainer />
                                 </Route>
                                 <Route path='/createLesson' exact>
-                                    <CreateLesson handleCreateLesson={this.props.handleCreateLesson} />
+                                    <CreateLesson handleCreateLesson={this.props.handleCreateLesson} handleRedirect={ this.props.handleRedirect } />
                                 </Route>
                                 <Route path='*'>
                                     <h2>Error</h2>

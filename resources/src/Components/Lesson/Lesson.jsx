@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react'
-import { Paper, Container, Typography, Card, 
-        CardContent, CardMedia, Divider,
-        CardActions, Button, Chip, Avatar } from '@material-ui/core'
-import { withStyles  } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
+import { Paper, Container, Typography, Card, 
+    CardContent, CardMedia, Divider,
+    CardActions, Button, Chip, Avatar, IconButton } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const styles = theme => ({
     root: {
-      maxWidth: 370,
+      margin: theme.spacing(1, 0, 0, 0),
     },
     media: {
         margin: theme.spacing(0, 0, 0.5, 0),
@@ -33,8 +34,7 @@ class Lesson extends Component{
         const { id, category, content, title, price, cover } = this.props.lesson
         
         return(
-            <Paper elevation={10}>
-                <Card>
+                <Card className={ classes.root }>
                     <CardContent>
                         <Typography gutterBottom variant="h2" component="h2">
                             { title }
@@ -43,7 +43,7 @@ class Lesson extends Component{
                             component="img"
                             alt="cover_lesson"
                             className={ classes.media }
-                            height="300"
+                            height="200"
                             image={ cover }
                             title={ title }
                         />
@@ -73,10 +73,11 @@ class Lesson extends Component{
                                 назад
                             </Button>
                         </Link>
+                        <IconButton aria-label="delete" color="primary">
+                            <DeleteIcon />
+                        </IconButton>
                     </CardActions>
                 </Card>
-            </Paper>
-            
         )
     }
 }

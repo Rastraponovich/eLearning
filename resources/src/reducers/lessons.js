@@ -35,10 +35,11 @@ export const lessonReducer = (state = initialState, action) => {
             })
 
         case LESSON_DELETE:
+            const { lessons } = state;
+            const { [action.payload]: _, ...newLessons } = lessons;
+            
             return update(state, {
-                lessons: {
-                    [action.payload.lessonId] : {}
-                }
+                $set: { lessons: newLessons }
             })
 
         default: 
