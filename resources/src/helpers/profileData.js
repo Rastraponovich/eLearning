@@ -2,9 +2,9 @@ import { AvatarGenerator } from 'random-avatar-generator'
 const generator = new AvatarGenerator()
 
 export const profile = {
-    firstName: 'Виталий',
-    lastName: 'Куроедов',
+    firstName: 'Иванов',
+    lastName: 'Иван',
     avatar: generator.generateRandomAvatar(),
-    email: 'wilde@bk.ru',
+    email: 'ivanov.i@protonmail.com',
     age: '31'
 }

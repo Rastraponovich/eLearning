@@ -159,7 +159,7 @@ export default function Header(props) {
       open={ isMenuOpen }
       onClose={ handleMenuClose }
     >
-      <MenuItem>
+      <MenuItem onClick={ handleMenuClose }>
         <Profile profile={ props.profile }/>
       </MenuItem>
       <MenuItem onClick={ handleMenuClose }>
