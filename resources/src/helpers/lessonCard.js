@@ -1,7 +1,7 @@
 import { AvatarGenerator } from 'random-avatar-generator'
 const generator = new AvatarGenerator()
 import { nanoid } from 'nanoid'
-export const lessons = {
+export const lessonsEntry = {
     Ukm7SJ: {
         id: 'Ukm7SJ',
         title: 'Урок 1',
