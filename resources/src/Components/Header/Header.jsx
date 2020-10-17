@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar, IconButton, Typography, Hidden, SwipeableDrawer,
+import { AppBar, Toolbar, IconButton, Typography, Hidden, SwipeableDrawer, Avatar,
         InputBase, Badge, MenuItem, Menu, Drawer, Divider, CardMedia } from '@material-ui/core'
 import Profile from 'components/Profile/Profile'
 import Navigation from 'components/Navigation/Navigation'
@@ -120,7 +120,7 @@ export default function Header(props) {
     const [mobileDrawer, setMobileDrawer] = React.useState(false)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
-    const handleProfileMenuOpen = (event) => {
+    const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget)
     }
 
@@ -144,11 +144,22 @@ export default function Header(props) {
     const menuId = 'primary-search-account-menu'
 
     const renderMenu = (
-        <>
-            <Menu >
+        <Menu 
+            anchorEl={ anchorEl }
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            keepMounted
+            id = { menuId }
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={ isMenuOpen }
+            onClose={ handleMenuClose }
+        >
+            <MenuItem>
                 <Profile profile={ props.profile }/>
-            </Menu>
-        </>
+            </MenuItem>
+            <MenuItem onClick={ handleMenuClose }>
+                <p>Выход</p>
+            </MenuItem>
+        </Menu>
     )
     const mobileMenuId = 'primary-search-account-menu-mobile'
     const renderMobileMenu = (
@@ -179,8 +190,10 @@ export default function Header(props) {
             </MenuItem>
             <MenuItem>
                 <Profile profile={ props.profile } />
-                <p>Профиль</p>
-          </MenuItem>
+            </MenuItem>
+            <MenuItem onClick={ handleMenuClose }>
+                <p>Выход</p>
+            </MenuItem>
         </Menu>
     )
 
@@ -232,12 +245,12 @@ export default function Header(props) {
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
-                            aria-controls={menuId}
+                            aria-controls={ menuId }
                             aria-haspopup="true"
-                            onClick={ handleProfileMenuOpen }
+                            onClick={ handleMenuOpen }
                             color="inherit"
                         >
-                            <Profile profile={ props.profile }/>
+                            <Avatar src={ props.profile.avatar } />
                         </IconButton>
                     </div>
                     <div className={ classes.sectionMobile }>

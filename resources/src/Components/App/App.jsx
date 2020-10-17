@@ -54,42 +54,38 @@ class App extends Component {
         const { classes } = this.props
         return(
             <Fragment>     
-                <Header 
-                    title={ this.state.title } 
-                    profile={ this.props.profile }/>
+                <Header title={ this.state.title } profile={ this.props.profile }/>
                 <main className={ classes.main }>
-                <Grid container  alignItems="stretch" >
-                    <Grid container item xs={12} justify="center" >
-                        <Container style={{ height: '88vh' }} fullWidth>
-                            <Switch>
-                            <Route path='/' exact >
-                                    <MainPage />
-                                </Route>
-                                <Route path='/lessons' exact >
-                                    <LessonList 
-                                    lessons={ this.props.lessons } 
-                                    handleDeleteItem={ this.props.handleDeleteItem }
-                                    handleSelectLesson={ this.handleSelectLesson }/>
-                                </Route>
-                                <Route path='/login' exact >
-                                    <LoginPage />
-                                </Route>
-                                <Route path='/lesson/:id' exact>
-                                    <LessonContainer />
-                                </Route>
-                                <Route path='/createLesson' exact>
-                                    <CreateLesson handleCreateLesson={this.props.handleCreateLesson} handleRedirect={ this.props.handleRedirect } />
-                                </Route>
-                                <Route path='*'>
-                                    <h2>Error</h2>
-                                </Route>
-                            </Switch>
-                            <AlertShow 
-                                popup={ this.props.popup } 
-                                hanldeCloseAlert={ this.hanldeCloseAlert } />
+                    {/* <Grid container  alignItems="stretch" > */}
+                        {/* <Grid container item xs={12} justify="center" > */}
+                            <Container style={{ height: '88vh' }} fullWidth>
+                                <Switch>
+                                    <Route path='/' exact >
+                                        <MainPage />
+                                    </Route>
+                                    <Route path='/lessons' exact >
+                                        <LessonList 
+                                            lessons={ this.props.lessons } 
+                                            handleDeleteItem={ this.props.handleDeleteItem }
+                                            handleSelectLesson={ this.handleSelectLesson }/>
+                                    </Route>
+                                    <Route path='/login' exact >
+                                        <LoginPage />
+                                    </Route>
+                                    <Route path='/lesson/:id' exact>
+                                        <LessonContainer />
+                                    </Route>
+                                    <Route path='/createLesson' exact>
+                                        <CreateLesson handleCreateLesson={this.props.handleCreateLesson} handleRedirect={ this.props.handleRedirect } />
+                                    </Route>
+                                    <Route path='*'>
+                                        <h2>Error</h2>
+                                    </Route>
+                                </Switch>
+                                <AlertShow  popup={ this.props.popup }  hanldeCloseAlert={ this.hanldeCloseAlert } />
                         </Container>
-                    </Grid>
-                </Grid>
+                    {/* </Grid> */}
+                {/* </Grid> */}
                 </main>
               </Fragment>
         )
