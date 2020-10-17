@@ -17,8 +17,18 @@ const drawerWidth = 150
 const styles = theme => ({
     main: {
         marginTop: 70,
-        marginLeft: drawerWidth,
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: drawerWidth,
+        }
     },
+
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+           display: 'flex',
+        },
+    },
+
 })
 
 class App extends Component {
