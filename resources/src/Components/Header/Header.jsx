@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     flexShrink: 0,
     width: mobileDrawerWidth,
+
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
     }
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
   drawerPaper: {
     width: mobileDrawerWidth,
+    backgroundColor: '#f5f5f5',
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
     }

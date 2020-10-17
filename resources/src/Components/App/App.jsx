@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import '../../layout/css/style.css'
-import { Container, Breadcrumbs, Typography } from '@material-ui/core'
+import { Container, Breadcrumbs, Typography, Hidden } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
 import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
@@ -16,10 +16,11 @@ const drawerWidth = 150
 const styles = theme => ({
     main: {
         marginTop: 40,
-        overflowY: 'scroll',
-        height: `calc(100% - 20%)`,
+        padding: '1rem',
+        position: 'relative',
+        width: '100%',
         [theme.breakpoints.up('sm')]: {
-            marginTop: 60,
+            marginTop: 64,
             marginLeft: drawerWidth,
         }
     },
@@ -27,6 +28,7 @@ const styles = theme => ({
     footer: {
         position: 'relative',
         zIndex: 1500,
+        width: '100%',
         [theme.breakpoints.up('sm')]: {
             '& p':{
                 marginLeft: drawerWidth,
@@ -67,7 +69,7 @@ class App extends Component {
         const { classes } = this.props
         return(
             <Fragment>     
-                <Header title={ this.state.title } profile={ this.props.profile }/>
+                <Header title={ this.state.title } profile={ this.props.profile } />
                 <main className={ classes.main }>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/" replace>
@@ -104,11 +106,13 @@ class App extends Component {
                         <AlertShow  popup={ this.props.popup }  hanldeCloseAlert={ this.hanldeCloseAlert } />
                     </Container>
                 </main>
-                <footer className={ classes.footer }>
-                    <Container fullWidth>
-                        <Typography variant="body1" align="center">Йа надпись в футаре</Typography>
-                    </Container>
-                </footer>
+                <Hidden xsDown>
+                    <footer className={ classes.footer }>
+                        <Container fullWidth>
+                            <Typography  variant="body1" align="center">Йа надпись в футаре</Typography>
+                        </Container>
+                    </footer>
+                </Hidden>
             </Fragment>
         )
     }
