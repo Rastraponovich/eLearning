@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import '../../layout/css/style.css'
-import { Container, Grid } from '@material-ui/core'
+import { Container, Breadcrumbs, Typography } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
-import Navigation from 'components/Navigation/Navigation'
 import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
 import { LessonContainer } from 'containers/LessonContainer'
@@ -16,9 +15,33 @@ const drawerWidth = 150
 
 const styles = theme => ({
     main: {
-        marginTop: 70,
-        marginLeft: drawerWidth,
+        marginTop: 40,
+        overflowY: 'scroll',
+        height: `calc(100% - 20%)`,
+        [theme.breakpoints.up('sm')]: {
+            marginTop: 60,
+            marginLeft: drawerWidth,
+        }
     },
+
+    footer: {
+        position: 'relative',
+        zIndex: 1500,
+        [theme.breakpoints.up('sm')]: {
+            '& p':{
+                marginLeft: drawerWidth,
+            }
+        },
+        backgroundColor: '#f5f5f5',
+    },
+
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+           display: 'flex',
+        },
+    },
+
 })
 
 class App extends Component {
@@ -44,44 +67,49 @@ class App extends Component {
         const { classes } = this.props
         return(
             <Fragment>     
-                <Header 
-                    title={ this.state.title } 
-                    profile={ this.props.profile }/>
+                <Header title={ this.state.title } profile={ this.props.profile }/>
                 <main className={ classes.main }>
-                <Grid container  alignItems="stretch" >
-                    <Grid container item xs={12} justify="center" >
-                        <Container style={{ height: '88vh' }} fullWidth>
-                            <Switch>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link to="/" replace>
+                            <Typography color="textPrimary"> Главная </Typography>
+                        </Link>
+                        <Typography color="textPrimary">Breadcrumb</Typography>
+                    </Breadcrumbs>
+                    <Container fullWidth>
+                        <Switch>
                             <Route path='/' exact >
-                                    <MainPage />
-                                </Route>
-                                <Route path='/lessons' exact >
-                                    <LessonList 
+                                <MainPage />
+                            </Route>
+                            <Route path='/lessons' exact >
+                                <LessonList 
                                     lessons={ this.props.lessons } 
                                     handleDeleteItem={ this.props.handleDeleteItem }
                                     handleSelectLesson={ this.handleSelectLesson }/>
-                                </Route>
-                                <Route path='/login' exact >
-                                    <LoginPage />
-                                </Route>
-                                <Route path='/lesson/:id' exact>
-                                    <LessonContainer />
-                                </Route>
-                                <Route path='/createLesson' exact>
-                                    <CreateLesson handleCreateLesson={this.props.handleCreateLesson} handleRedirect={ this.props.handleRedirect } />
-                                </Route>
-                                <Route path='*'>
-                                    <h2>Error</h2>
-                                </Route>
-                            </Switch>
-                            <AlertShow 
-                                popup={ this.props.popup } 
-                                hanldeCloseAlert={ this.hanldeCloseAlert } />
-                        </Container>
-                    </Grid>
-                </Grid>
+                            </Route>
+                            <Route path='/login' exact >
+                                <LoginPage />
+                            </Route>
+                            <Route path='/lesson/:id' exact>
+                                <LessonContainer />
+                            </Route>
+                            <Route path='/createLesson' exact>
+                                <CreateLesson 
+                                    handleCreateLesson={this.props.handleCreateLesson} 
+                                    handleRedirect={ this.props.handleRedirect } />
+                            </Route>
+                            <Route path='*'>
+                                <h2>Error</h2>
+                            </Route>
+                        </Switch>
+                        <AlertShow  popup={ this.props.popup }  hanldeCloseAlert={ this.hanldeCloseAlert } />
+                    </Container>
                 </main>
-              </Fragment>
+                <footer className={ classes.footer }>
+                    <Container fullWidth>
+                        <Typography variant="body1" align="center">Йа надпись в футаре</Typography>
+                    </Container>
+                </footer>
+            </Fragment>
         )
     }
 }

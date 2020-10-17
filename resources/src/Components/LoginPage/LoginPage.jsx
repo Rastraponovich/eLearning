@@ -54,7 +54,9 @@ export default function LoginPage() {
     const theme = useTheme()
     const [value, setValue] = React.useState(0)
     const [mail, setMail] = React.useState('')
-    const [name, setName] = React.useState('')
+    const [firstName, setFirstName] = React.useState('')
+    const [lastName, setLastName] = React.useState('')
+
     const [password, setPassword] = React.useState('')
     const [rePassword, setRePassword] = React.useState('')
 
@@ -63,8 +65,12 @@ export default function LoginPage() {
        setValue(newValue)
     }
 
-    const handleName = (event) => {
-        setName(event.target.value)
+    const handleFirstName = (event) => {
+        setFirstName(event.target.value)
+    }
+
+    const handleLastName = (event) => {
+        setLastName(event.target.value)
     }
 
     const handleMail = (event) => {
@@ -136,14 +142,24 @@ export default function LoginPage() {
                 <TabPanel value={ value } index={1} dir={ theme.direction }>
                 <form className={ classes.form } action="/" method="POST" noValidate={ true }>
                         <TextField 
-                            id="name" 
+                            id="firstName" 
                             label="Имя" 
                             variant="outlined" 
                             fullWidth 
                             required 
                             size="small"
-                            value={ name }
-                            onChange={ handleName }
+                            value={ firstName }
+                            onChange={ handleFirstName }
+                        /> 
+                        <TextField 
+                            id="lastName" 
+                            label="Фамилия"
+                            variant="outlined" 
+                            fullWidth 
+                            required 
+                            size="small"
+                            value={ lastName }
+                            onChange={ handleLastName }
                         /> 
                         <TextField 
                             id="email" 

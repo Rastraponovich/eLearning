@@ -208,7 +208,7 @@ class CreateLesson extends Component{
                             </Grid>
                         </form>
                     </Grid>
-                    <Grid container item xs={1} justify="center" >
+                    <Grid container item sm={1} justify="center" >
                         <Divider orientation="vertical" flexItem />
                     </Grid>
                     

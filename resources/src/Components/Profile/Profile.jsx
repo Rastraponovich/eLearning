@@ -86,7 +86,8 @@ export default function Profile(props) {
     const error = props.error ? 'Data is not set' : 'OK'
     return (
         <div className={classes.regButton}>
-            <Avatar className="avatar" onClick={ handleClickOpen } src={ props.profile.avatar }/>
+            <p onClick={ handleClickOpen } >Профиль</p>
+            {/* <Avatar className="avatar" onClick={ handleClickOpen } src={ props.profile.avatar }/> */}
             <Dialog
                 open={ open }
                 fullWidth
