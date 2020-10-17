@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import '../../layout/css/style.css'
-import { Container, Grid } from '@material-ui/core'
+import { Container, Breadcrumbs, Typography } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
-import Navigation from 'components/Navigation/Navigation'
 import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
 import { LessonContainer } from 'containers/LessonContainer'
@@ -17,11 +16,23 @@ const drawerWidth = 150
 const styles = theme => ({
     main: {
         marginTop: 40,
-        height: '88vh',
+        overflowY: 'scroll',
+        height: `calc(100% - 20%)`,
         [theme.breakpoints.up('sm')]: {
-            marginTop: 70,
+            marginTop: 60,
             marginLeft: drawerWidth,
         }
+    },
+
+    footer: {
+        position: 'relative',
+        zIndex: 1500,
+        [theme.breakpoints.up('sm')]: {
+            '& p':{
+                marginLeft: drawerWidth,
+            }
+        },
+        backgroundColor: '#f5f5f5',
     },
 
     sectionDesktop: {
@@ -58,6 +69,12 @@ class App extends Component {
             <Fragment>     
                 <Header title={ this.state.title } profile={ this.props.profile }/>
                 <main className={ classes.main }>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link to="/" replace>
+                            <Typography color="textPrimary"> Главная </Typography>
+                        </Link>
+                        <Typography color="textPrimary">Breadcrumb</Typography>
+                    </Breadcrumbs>
                     <Container fullWidth>
                         <Switch>
                             <Route path='/' exact >
@@ -87,6 +104,11 @@ class App extends Component {
                         <AlertShow  popup={ this.props.popup }  hanldeCloseAlert={ this.hanldeCloseAlert } />
                     </Container>
                 </main>
+                <footer className={ classes.footer }>
+                    <Container fullWidth>
+                        <Typography variant="body1" align="center">Йа надпись в футаре</Typography>
+                    </Container>
+                </footer>
             </Fragment>
         )
     }
