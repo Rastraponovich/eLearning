@@ -5,6 +5,7 @@ import { Container, Breadcrumbs, Typography, Hidden } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
 import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
+import Aside from 'components/Aside/Aside'
 import { LessonContainer } from 'containers/LessonContainer'
 import Header from 'components/Header/Header'
 import AlertShow from 'components/AlertShow/AlertShow'
@@ -21,12 +22,18 @@ const styles = theme => ({
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginTop: 64,
-            marginLeft: drawerWidth,
         }
+    },
+    container: {
+        display: 'flex',
+        width: '100%',
     },
 
     footer: {
         position: 'relative',
+        height: '50px',
+        display: 'flex',
+        alignItems: 'center',
         zIndex: 1500,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
@@ -43,6 +50,7 @@ const styles = theme => ({
            display: 'flex',
         },
     },
+    helper: {},
 
 })
 
@@ -51,7 +59,12 @@ class App extends Component {
     state = {
         title: 'eLearning',
         error: null,
+        mobileDrawer: false,
     }
+
+    handleMobileDrawerOpen = () => {
+        this.setState({ mobileDrawer: !this.state.mobileDrawer })
+      }
 
     hanldeCloseAlert = (value) => {
         this.props.handleCloseAlert(value)
@@ -69,50 +82,57 @@ class App extends Component {
         const { classes } = this.props
         return(
             <Fragment>     
-                <Header title={ this.state.title } profile={ this.props.profile } />
-                <main className={ classes.main }>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/" replace>
-                            <Typography color="textPrimary"> Главная </Typography>
-                        </Link>
-                        <Typography color="textPrimary">Breadcrumb</Typography>
-                    </Breadcrumbs>
-                    <Container fullWidth>
-                        <Switch>
-                            <Route path='/' exact >
-                                <MainPage />
-                            </Route>
-                            <Route path='/lessons' exact >
-                                <LessonList 
-                                    lessons={ this.props.lessons } 
-                                    handleDeleteItem={ this.props.handleDeleteItem }
-                                    handleSelectLesson={ this.handleSelectLesson }/>
-                            </Route>
-                            <Route path='/login' exact >
-                                <LoginPage />
-                            </Route>
-                            <Route path='/lesson/:id' exact>
-                                <LessonContainer />
-                            </Route>
-                            <Route path='/createLesson' exact>
-                                <CreateLesson 
-                                    handleCreateLesson={this.props.handleCreateLesson} 
-                                    handleRedirect={ this.props.handleRedirect } />
-                            </Route>
-                            <Route path='*'>
-                                <h2>Error</h2>
-                            </Route>
-                        </Switch>
-                        <AlertShow  popup={ this.props.popup }  hanldeCloseAlert={ this.hanldeCloseAlert } />
-                    </Container>
-                </main>
-                <Hidden xsDown>
+                <Header 
+                    title={ this.state.title } 
+                    profile={ this.props.profile } 
+                    handleMobileDrawerOpen={ this.handleMobileDrawerOpen } />
+                <div className={ classes.container }>
+                    <Aside handleMobileDrawerOpen={ this.handleMobileDrawerOpen } mobileDrawer={ this.state.mobileDrawer } />
+                    <main className={ classes.main }>
+                        <Breadcrumbs aria-label="breadcrumb">
+                            <Link to="/" replace>
+                                <Typography color="textPrimary"> Главная </Typography>
+                            </Link>
+                            <Typography color="textPrimary">Breadcrumb</Typography>
+                        </Breadcrumbs>
+                        <Container fullWidth>
+                            <Switch>
+                                <Route path='/' exact >
+                                    <MainPage />
+                                </Route>
+                                <Route path='/lessons' exact >
+                                    <LessonList 
+                                        lessons={ this.props.lessons } 
+                                        handleDeleteItem={ this.props.handleDeleteItem }
+                                        handleSelectLesson={ this.handleSelectLesson }/>
+                                </Route>
+                                <Route path='/login' exact >
+                                    <LoginPage />
+                                </Route>
+                                <Route path='/lesson/:id' exact>
+                                    <LessonContainer />
+                                </Route>
+                                <Route path='/createLesson' exact>
+                                    <CreateLesson 
+                                        handleCreateLesson={this.props.handleCreateLesson} 
+                                        handleRedirect={ this.props.handleRedirect } />
+                                </Route>
+                                <Route path='*'>
+                                    <h2>Error</h2>
+                                </Route>
+                            </Switch>
+                            <AlertShow  popup={ this.props.popup }  hanldeCloseAlert={ this.hanldeCloseAlert } />
+                        </Container>
+                    </main>
+                </div>
+                <div className={classes.helper}></div>
+                {/* <Hidden xsDown>
                     <footer className={ classes.footer }>
                         <Container fullWidth>
                             <Typography  variant="body1" align="center">Йа надпись в футаре</Typography>
                         </Container>
                     </footer>
-                </Hidden>
+                </Hidden> */}
             </Fragment>
         )
     }

@@ -13,7 +13,6 @@ import MoreIcon from '@material-ui/icons/MoreVert'
 
 const drawerWidth = 150
 const mobileDrawerWidth = 275
-const image = 'https://i.ibb.co/TtFYWTL/logo.png'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -33,27 +32,6 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     }
-  },
-
-  drawer: {
-    flexShrink: 0,
-    width: mobileDrawerWidth,
-
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-    }
-  },
-
-  drawerPaper: {
-    width: mobileDrawerWidth,
-    backgroundColor: '#f5f5f5',
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-    }
-  },
-
-  media: {
-    height: 100,
   },
 
   title: {
@@ -145,10 +123,6 @@ export default function Header(props) {
     setMobileMoreAnchorEl(event.currentTarget)
   }
 
-  const handleMobileDrawerOpen = () => {
-    setMobileDrawer(!mobileDrawer)
-  }
-
   const menuId = 'primary-search-account-menu'
 
   const renderMenu = (
@@ -207,7 +181,7 @@ export default function Header(props) {
   )
 
   return (
-    <div className={ classes.grow }>
+    <div className={ classes.grow1 }>
       <AppBar position="fixed" className={ classes.appBar } >
         <Toolbar variant="dense">
           <IconButton
@@ -217,7 +191,7 @@ export default function Header(props) {
             aria-label="open drawer"
             aria-controls={ mobileMenuId }
             aria-haspopup="true"
-            onClick={ handleMobileDrawerOpen }
+            onClick={ props.handleMobileDrawerOpen }
           >
             <MenuIcon />
           </IconButton>
@@ -273,35 +247,6 @@ export default function Header(props) {
       </AppBar>
       { renderMobileMenu }
       { renderMenu }
-      <Hidden xsDown implementation="css">
-        <Drawer
-          className={ classes.drawer }
-          variant="permanent"
-          classes={{ paper: classes.drawerPaper }}
-          anchor="left"
-        >
-          <div className={ classes.toolbar } />
-          <CardMedia image={image} className={ classes.media }/>
-          <Divider />
-          <Navigation />
-        </Drawer>
-      </Hidden> 
-      <Hidden smUp implementation="css">
-        <SwipeableDrawer
-          onClose={ handleMobileDrawerOpen }
-          onOpen={ handleMobileDrawerOpen }
-          onClick={ handleMobileDrawerOpen }
-          className={ classes.drawer }
-          classes={{ paper: classes.drawerPaper }}
-          anchor="left"
-          open={ mobileDrawer }
-        >
-          <div className={ classes.toolbar } />
-          <CardMedia image={image} className={ classes.media }/>
-          <Divider />
-          <Navigation />
-        </SwipeableDrawer>
-      </Hidden>
-    </div>
+   </div>
   )
 }

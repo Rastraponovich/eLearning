@@ -1,16 +1,16 @@
 import React, { Fragment, Component } from 'react'
 import { Grid } from '@material-ui/core'
 import { withStyles  } from '@material-ui/core/styles'
-import { Typography, Divider, Fab } from '@material-ui/core'
+import { Typography, Divider, Fab, Container } from '@material-ui/core'
 import LessonItem from 'components/LessonItem/LessonItem'
 import ScrollableFeed from 'react-scrollable-feed'
-import ModalComponent from 'components/ModalComponent/ModalComponent'
 import AddIcon from '@material-ui/icons/Add'
 import { green } from '@material-ui/core/colors'
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        paddingBottom: '2rem',
     },
     paper: {
         height: 140,
@@ -26,6 +26,10 @@ const styles = theme => ({
         position: 'absolute',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
+        [theme.breakpoints.up('lg')]: {
+            bottom: theme.spacing(8) * 2,
+            right: theme.spacing(8) * 2, 
+        },
         color: theme.palette.common.white,
         backgroundColor: green[500],
         '&:hover': {
@@ -55,7 +59,7 @@ class LessonList extends Component{
                 <Divider className={ classes.spacing } />
                 <Grid container className={ classes.root } spacing={2}>
                     { lessonsItems.map((item) => 
-                        <Grid item xs={12} sm={6} md={4} key={ item }>
+                        <Grid  item xs={12} sm={6} md={4} lg={3} xl={6} key={ item }>
                             <LessonItem 
                                 key={item.id} 
                                 { ...lessons[item] } 
