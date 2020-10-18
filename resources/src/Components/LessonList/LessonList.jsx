@@ -27,8 +27,8 @@ const styles = theme => ({
         bottom: theme.spacing(2),
         right: theme.spacing(2),
         [theme.breakpoints.up('lg')]: {
-            bottom: theme.spacing(8) * 2,
-            right: theme.spacing(8) * 2, 
+            bottom: 0,
+            right: theme.spacing(8) * 4, 
         },
         color: theme.palette.common.white,
         backgroundColor: green[500],
