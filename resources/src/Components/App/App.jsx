@@ -7,7 +7,7 @@ import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
 import Aside from 'components/Aside/Aside'
 import { LessonContainer } from 'containers/LessonContainer'
-import Header from 'components/Header/Header'
+import { HeaderContainer } from 'containers/HeaderContainer'
 import AlertShow from 'components/AlertShow/AlertShow'
 import LoginPage from 'components/LoginPage/LoginPage'
 import { withStyles } from '@material-ui/core/styles'
@@ -59,12 +59,7 @@ class App extends Component {
     state = {
         title: 'eLearning',
         error: null,
-        mobileDrawer: false,
     }
-
-    handleMobileDrawerOpen = () => {
-        this.setState({ mobileDrawer: !this.state.mobileDrawer })
-      }
 
     hanldeCloseAlert = (value) => {
         this.props.handleCloseAlert(value)
@@ -82,12 +77,9 @@ class App extends Component {
         const { classes } = this.props
         return(
             <Fragment>     
-                <Header 
-                    title={ this.state.title } 
-                    profile={ this.props.profile } 
-                    handleMobileDrawerOpen={ this.handleMobileDrawerOpen } />
+                <HeaderContainer title={ this.state.title } />
                 <div className={ classes.container }>
-                    <Aside handleMobileDrawerOpen={ this.handleMobileDrawerOpen } mobileDrawer={ this.state.mobileDrawer } />
+                    <Aside handleMobileDrawerOpen={ this.props.handleMobileDrawerOpen } mobileDrawer={ this.props.mobileDrawer } />
                     <main className={ classes.main }>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link to="/" replace>
@@ -125,7 +117,6 @@ class App extends Component {
                         </Container>
                     </main>
                 </div>
-                <div className={classes.helper}></div>
                 {/* <Hidden xsDown>
                     <footer className={ classes.footer }>
                         <Container fullWidth>

@@ -47,7 +47,7 @@ class Aside extends Component {
                         anchor="left"
                         >
                             <div className={ classes.toolbar } />
-                            <CardMedia image={image} className={ classes.media }/>
+                            <CardMedia image={ image } className={ classes.media }/>
                             <Divider />
                             <Navigation />
                     </Drawer>
@@ -63,7 +63,7 @@ class Aside extends Component {
                         open={ this.props.mobileDrawer }
                     >
                         <div className={ classes.toolbar } />
-                        <CardMedia image={image} className={ classes.media }/>
+                        <CardMedia image={ image } className={ classes.media }/>
                         <Divider />
                         <Navigation />
                     </SwipeableDrawer>
