@@ -39,7 +39,8 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        marginTop: "1rem"
+        marginTop: "1rem",
+        height: '100%'
     },
     form: { 
         '& .MuiTextField-root':{

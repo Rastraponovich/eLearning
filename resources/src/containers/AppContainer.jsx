@@ -7,7 +7,7 @@ import App from 'components/App/App'
 import { alertLoadAction, alertCloseInformAction, alertSendInformAction } from 'actions/alerts'
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
 import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
-
+import { mobileDrawerStateLoadAction, mobileDrawerStateSetAction } from 'actions/header'
 
 class AppContainerClass extends Component {
 
@@ -16,6 +16,7 @@ class AppContainerClass extends Component {
             profile, 
             popup, 
             lessons,
+            header,
             alertLoadAction, 
             profileLoadAction,
             lessonsLoadAction, 
@@ -23,6 +24,7 @@ class AppContainerClass extends Component {
         
         if (!Object.keys(lessons).length) {
             lessonsLoadAction()
+            mobileDrawerStateLoadAction()
         }
 
         if (!profile.length || !popup.length) {
@@ -63,7 +65,6 @@ class AppContainerClass extends Component {
     }
 
     handleDeleteItem = (data) => {
-        console.log(data)
         this.props.deleteLesonAction(data)
     }
     // handleNameChange = (value) => {
@@ -74,11 +75,17 @@ class AppContainerClass extends Component {
         this.props.redirect('lessons')
     }
 
+    handleMobileDrawerOpen = () => {
+        const { mobileDrawer, mobileDrawerStateSetAction } = this.props
+        mobileDrawerStateSetAction(!mobileDrawer)
+    }
+
     render() {
         return (
             <ConnectedRouter history={ history }>     
                 <App
                     { ...this.props } 
+                    handleMobileDrawerOpen={ this.handleMobileDrawerOpen }
                     handleRedirect={ this.handleRedirect }
                     handleDeleteItem={ this.handleDeleteItem }
                     handleSelectLesson={ this.props.selectLessonAction } 
@@ -91,12 +98,14 @@ class AppContainerClass extends Component {
 const mapStateToProps = (state, ownProps) => {
     console.log(state)
     const { popup } = state.alert
+    const { mobileDrawer } = state.header
     const { profile } = state.profile
     const { lessons, lessonId } = state.lessons
     const { match } = ownProps
 
     return {
         popup,
+        mobileDrawer,
         profile,
         lessons,
         lessonId
@@ -115,6 +124,8 @@ const mapDispatchToProps = (dispatch) => {
         createLessonAction: (data) => dispatch(createLessonAction(data)),
         deleteLesonAction: (data) => dispatch(deleteLesonAction(data)),
         redirect: (value) => dispatch(push(`/${value}`)),
+        mobileDrawerStateLoadAction: () => dispatch(mobileDrawerStateLoadAction()),
+        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
     }
 }
 
