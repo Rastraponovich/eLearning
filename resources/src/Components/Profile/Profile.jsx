@@ -1,5 +1,6 @@
 import React from 'react'
 import Draggable from 'react-draggable'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Dialog, DialogActions, DialogContent,
     DialogContentText, DialogTitle, Paper, TextField,
@@ -85,7 +86,7 @@ export default function Profile(props) {
 
     const error = props.error ? 'Data is not set' : 'OK'
     return (
-        <div className={classes.regButton}>
+        <div className={ classes.regButton }>
             <p onClick={ handleClickOpen } >Профиль</p>
             {/* <Avatar className="avatar" onClick={ handleClickOpen } src={ props.profile.avatar }/> */}
             <Dialog
@@ -96,18 +97,24 @@ export default function Profile(props) {
                 aria-labelledby="draggable-dialog-title"
             >
                 <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                    <div className={classes.profileTitleContainer}>
+                    <div className={ classes.profileTitleContainer }>
                         { props.profile.firstName }   { props.profile.lastName } 
+                        <Link to='/cabinet' replace>
+                            <Button color="primary" variant="contained" onClick={ handleClose }>
+                                Кабинет
+                            </Button>
+                        </Link>
                     </div>
+                    
                     
                 </DialogTitle>
                 <DialogContent>
-                    <Avatar className="avatar" className={classes.large} src={props.profile.avatar}/>
+                    <Avatar className="avatar" className={ classes.large } src={ props.profile.avatar }/>
                     <DialogContentText> 
                         Введите новые данные о пользователе
                     </DialogContentText>
                     <DialogContentText> 
-                        Возраст : {props.profile.age}
+                        Возраст : { props.profile.age }
                     </DialogContentText>
                     
                     <TextField

@@ -57,10 +57,10 @@ const styles = theme => ({
         const { id, title, content, category, price, cover, classes, lessonId } = this.props
         return(
             <>
-            <Card elevation={5} key={id}>
+            <Card elevation={5} key={ id }>
                 <CardActionArea onClick={ this.props.modal ? this.handleClose : this.handleOpen }>
                     <CardMedia
-                        className={classes.media}
+                        className={ classes.media }
                         image={ cover }
                         title="Contemplative Reptile"
                     />
