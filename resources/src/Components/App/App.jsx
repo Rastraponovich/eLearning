@@ -6,6 +6,7 @@ import LessonList from 'components/LessonList/LessonList'
 import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
 import Aside from 'components/Aside/Aside'
+import Cart from 'components/Cart/Cart'
 import Cabinet from 'components/Cabinet/Cabinet'
 import { LessonContainer } from 'containers/LessonContainer'
 import { HeaderContainer } from 'containers/HeaderContainer'
@@ -112,6 +113,9 @@ class App extends Component {
                                 </Route>
                                 <Route path='/cabinet' exact>
                                     <Cabinet profile={ this.props.profile }/>
+                                </Route>
+                                <Route path='/cart' exact>
+                                    <Cart />
                                 </Route>
                                 <Route path='*'>
                                     <h2>Error</h2>
