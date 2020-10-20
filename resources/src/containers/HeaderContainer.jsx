@@ -19,7 +19,6 @@ class HeaderContainerClass extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state)
     const { profile } = state.profile
     const { mobileDrawer } = state.header
     return {

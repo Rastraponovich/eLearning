@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router'
 import { profileReducer } from './profile'
 import { alertReducer } from './alerts'
 import { lessonReducer } from './lessons'
+import { cartReducer } from './cart'
 import { headerReducer } from './header'
 
 export const createRootReducer = (history) => combineReducers({
@@ -10,6 +11,7 @@ export const createRootReducer = (history) => combineReducers({
     alert: alertReducer,
     lessons: lessonReducer,
     header: headerReducer,
+    cart: cartReducer,
     router: connectRouter(history)
 })
 

@@ -96,6 +96,7 @@ class App extends Component {
                                 </Route>
                                 <Route path='/lessons' exact >
                                     <LessonList 
+                                        handleCartAdd = { this.props.handleCartAdd }
                                         lessons={ this.props.lessons } 
                                         handleDeleteItem={ this.props.handleDeleteItem }
                                         handleSelectLesson={ this.handleSelectLesson }/>
@@ -115,7 +116,7 @@ class App extends Component {
                                     <Cabinet profile={ this.props.profile }/>
                                 </Route>
                                 <Route path='/cart' exact>
-                                    <Cart />
+                                    <Cart cart={ this.props.cart } hanldeCartDelete={ this.props.cartDeleteAction }/>
                                 </Route>
                                 <Route path='*'>
                                     <h2>Error</h2>

@@ -52,6 +52,16 @@ const styles = theme => ({
     handleClose = () => {
         this.setState( { open: false } )
     }
+
+    handleCartAdd = () => {
+        const data = {
+            id: this.props.id,
+            name: this.props.title,
+            price: this.props.price,
+        }
+
+        this.props.handleCartAdd(data)
+    }
     
     render() {
         const { id, title, content, category, price, cover, classes, lessonId } = this.props
@@ -80,8 +90,8 @@ const styles = theme => ({
                     </CardContent>
                 </CardActionArea>
                 <CardActions className={ classes.cardAction }>
-                    <Button size="small" color="primary" variant="contained" >
-                        Купить
+                    <Button size="small" color="primary" variant="contained" onClick={ this.handleCartAdd } >
+                        В корзину
                     </Button>
                     <Link className="link" to={ `/lesson/${id}` } replace>
                         <Button onClick={ this.handleSelectLesson } size="small" variant="contained" color="primary">
