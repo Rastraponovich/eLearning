@@ -34,13 +34,11 @@ class AppContainerClass extends Component {
             alertLoadAction()
         }
     }
-
     
     handleCreateLesson = (data) => {
         this.props.createLessonAction({ author: this.props.profile, data: data })
     }
     
-
     // handleDelete = (data) => {
     //     this.props.chatsMessageDeleteInformAction(data)
     // }
@@ -63,11 +61,6 @@ class AppContainerClass extends Component {
     handleCloseAlert = (value) => {
         this.props.alertCloseInformAction(value)
     }
-
-    
-    // handleNameChange = (value) => {
-    //     this.props.profileChangeNameAction(value)
-    // }
     
     handleRedirect = (path) => {
         this.props.redirect( path ? path : 'lessons')
@@ -75,10 +68,7 @@ class AppContainerClass extends Component {
     
     render() {
         return (
-                <App
-                    { ...this.props } 
-                    handleRedirect={ this.handleRedirect }
-                    handleCreateLesson={ this.handleCreateLesson } />
+                <App { ...this.props } handleRedirect={ this.handleRedirect } handleCreateLesson={ this.handleCreateLesson } />
         )
     }
 }
@@ -102,7 +92,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log(dispatch)
     return {
         profileLoadAction: () => dispatch(profileLoadAction()),
         profileChangeNameAction: (name) => dispatch(profileChangeNameAction(name)),

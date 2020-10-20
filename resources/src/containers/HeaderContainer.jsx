@@ -20,11 +20,13 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ mobileDrawerStateSetAction }, dispatch)
     
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const redirect = (path) => { push(`/${path}`) }
+    
 
     return {
         ...stateProps,
-        ...dispatchProps,
+        redirect
     }
-}    
+}
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header)

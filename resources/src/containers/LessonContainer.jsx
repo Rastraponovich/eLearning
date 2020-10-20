@@ -6,14 +6,6 @@ import { lessonsLoadAction, deleteLesonAction } from 'actions/lessons'
 const mapDispatchToProps = (dispatch) => 
     bindActionCreators({ lessonsLoadAction, deleteLesonAction }, dispatch)
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-
-    return {
-        ...stateProps,
-        ...dispatchProps
-    }
-}
-
 const mapStateToProps = (store, props) => {
     const { match } = props
     const { lessonId, lessons } = store.lessons
@@ -26,4 +18,4 @@ const mapStateToProps = (store, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Lesson)
+export default connect(mapStateToProps, mapDispatchToProps)(Lesson)
