@@ -115,6 +115,16 @@ export default function Header(props) {
     setMobileMoreAnchorEl(null)
   }
 
+  const hanldeCartItemCount = () => {
+    const { cart } = props
+    const cartItems = []
+
+    for (let [key, value] of Object.entries(cart)) {
+        cartItems.push(value)
+    }
+    return cartItems.map(({ quantity }) => quantity).reduce((sum, i) => sum + i , 0)
+  }
+
   const handleMenuClose = () => {
     setAnchorEl(null)
     handleMobileMenuClose()
@@ -236,7 +246,7 @@ export default function Header(props) {
             <Avatar src={ props.profile.avatar } />
           </IconButton>
           <IconButton aria-label="show 1 goods in cart" color="inherit">
-            <Badge badgeContent={1} color="secondary">
+            <Badge badgeContent={hanldeCartItemCount()} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
