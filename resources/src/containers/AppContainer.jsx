@@ -1,14 +1,12 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { ConnectedRouter, push } from 'connected-react-router'
-import { history } from '../store'
-
 import App from 'components/App/App'
 import { alertLoadAction, alertCloseInformAction, alertSendInformAction } from 'actions/alerts'
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
 import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
 import { mobileDrawerStateLoadAction, mobileDrawerStateSetAction } from 'actions/header'
-import { cartLoadAction, cartAddAction, cartDeleteAction, cartRemoveAction, cartMinusItemAction, cartPlusItemAction } from 'actions/cart'
+import { cartLoadAction, cartAddAction, cartDeleteAction, cartRemoveAction } from 'actions/cart'
 
 class AppContainerClass extends Component {
 
@@ -37,9 +35,7 @@ class AppContainerClass extends Component {
         }
     }
 
-    handleSelectLesson = (id) => {
-        this.props.selectLessonAction(id)
-    }
+    
     handleCreateLesson = (data) => {
         this.props.createLessonAction({ author: this.props.profile, data: data })
     }
@@ -68,47 +64,21 @@ class AppContainerClass extends Component {
         this.props.alertCloseInformAction(value)
     }
 
-    handleDeleteItem = (data) => {
-        this.props.deleteLesonAction(data)
-    }
+    
     // handleNameChange = (value) => {
     //     this.props.profileChangeNameAction(value)
     // }
     
     handleRedirect = (path) => {
-        this.props.redirect('lessons')
+        this.props.redirect( path ? path : 'lessons')
     }
-
-    handleMobileDrawerOpen = () => {
-        const { mobileDrawer, mobileDrawerStateSetAction } = this.props
-        mobileDrawerStateSetAction(!mobileDrawer)
-    }
-
-    handleCartAdd = (data) => {
-        const { cart } = this.props
-        let quantity
-        if (cart[data.id]) {
-            quantity = cart[data.id].quantity+1
-        } else {
-            quantity = 1
-        }
-        
-        data.quantity = quantity
-        this.props.cartAddAction(data)
-    }
-
+    
     render() {
         return (
-            <ConnectedRouter history={ history }>     
                 <App
                     { ...this.props } 
-                    handleCartAdd={ this.handleCartAdd }
-                    handleMobileDrawerOpen={ this.handleMobileDrawerOpen }
                     handleRedirect={ this.handleRedirect }
-                    handleDeleteItem={ this.handleDeleteItem }
-                    handleSelectLesson={ this.props.selectLessonAction } 
                     handleCreateLesson={ this.handleCreateLesson } />
-            </ConnectedRouter>
         )
     }
 }
@@ -132,6 +102,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+    console.log(dispatch)
     return {
         profileLoadAction: () => dispatch(profileLoadAction()),
         profileChangeNameAction: (name) => dispatch(profileChangeNameAction(name)),
@@ -144,14 +115,11 @@ const mapDispatchToProps = (dispatch) => {
         deleteLesonAction: (data) => dispatch(deleteLesonAction(data)),
         redirect: (value) => dispatch(push(`/${value}`)),
         mobileDrawerStateLoadAction: () => dispatch(mobileDrawerStateLoadAction()),
-        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
+        mobileDrawerStateSetAction: () => dispatch(mobileDrawerStateSetAction()),
         cartLoadAction: () => dispatch(cartLoadAction()),
         cartDeleteAction: () => dispatch(cartDeleteAction()),
         cartAddAction: (data) => dispatch(cartAddAction(data)),
         cartRemoveAction: (itemId) => dispatch(cartRemoveAction(itemId)),
-        cartPlusItemAction: (itemId) => dispatch(cartPlusItemAction(itemId)),
-        cartMinusItemAction: (itemId) => dispatch(cartMinusItemAction(itemId)),
-
     }
 }
 

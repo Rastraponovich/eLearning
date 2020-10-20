@@ -9,9 +9,6 @@ const BULK_IMAGE = `https://icon-library.com/images/no-image-icon/no-image-icon-
 
 const styles = theme => ({
     root: {
-        // width: '100%',
-        // maxWidth: 400,
-        // height: '100%',
         padding: theme.spacing(4, 4, 4, 4),
         backgroundColor: theme.palette.background.paper,
     },

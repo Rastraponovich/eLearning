@@ -1,22 +1,8 @@
-import React, { Component, Fragment } from 'react'
-import Header from 'components/Header/Header'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import { mobileDrawerStateSetAction } from 'actions/header'
-
-
-class HeaderContainerClass extends Component {
-    
-    handleMobileDrawerOpen = () => {
-        const { mobileDrawer, mobileDrawerStateSetAction } = this.props
-        mobileDrawerStateSetAction(!mobileDrawer)
-    }
-
-    render() {
-        return(
-            <Header { ...this.props } handleMobileDrawerOpen={ this.handleMobileDrawerOpen }/>
-        )
-    }
-}
+import Header from 'components/Header/Header'
 
 const mapStateToProps = (state, ownProps) => {
     const { profile } = state.profile
@@ -30,12 +16,15 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({ mobileDrawerStateSetAction }, dispatch)
+    
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
     return {
-        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
-        redirect: (value) => dispatch(push(`/${value}`)),
-
+        ...stateProps,
+        ...dispatchProps,
     }
-}
+}    
 
-export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderContainerClass)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header)

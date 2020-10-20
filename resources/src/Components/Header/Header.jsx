@@ -120,16 +120,6 @@ export default function Header(props) {
     setMobileMoreAnchorEl(null)
   }
 
-  const hanldeCartItemCount = () => {
-    const { cart } = props
-    const cartItems = []
-
-    for (let [key, value] of Object.entries(cart)) {
-        cartItems.push(value)
-    }
-    return cartItems.map(({ quantity }) => quantity).reduce((sum, i) => sum + i , 0)
-  }
-
   const handleMenuClose = () => {
     setAnchorEl(null)
     handleMobileMenuClose()
@@ -195,7 +185,7 @@ export default function Header(props) {
       </MenuItem>
       <MenuItem onClick={ handleCartOpen }>
         <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={hanldeCartItemCount()} color="secondary">
+          <Badge badgeContent={ Object.keys(props.cart).length } color="secondary">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -224,7 +214,7 @@ export default function Header(props) {
             aria-label="open drawer"
             aria-controls={ mobileMenuId }
             aria-haspopup="true"
-            onClick={ props.handleMobileDrawerOpen }
+            onClick={ props.mobileDrawerStateSetAction }
           >
             <MenuIcon />
           </IconButton>
@@ -267,12 +257,11 @@ export default function Header(props) {
           <Link to='/cart' replace className={ classes.link }>
 
           <IconButton aria-label="show 1 goods in cart" color="inherit">
-            <Badge badgeContent={hanldeCartItemCount()} color="secondary">
+            <Badge badgeContent= { Object.keys(props.cart).length } color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
           </Link>
-
         </div>
         <div className={ classes.sectionMobile }>
           <IconButton

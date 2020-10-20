@@ -24,10 +24,6 @@ class Cart extends Component{
         selected: ''
     }
 
-    handleSubtotal(items) {
-        return items.map(({ price, quantity }) => price * quantity).reduce((sum, i) => sum + i , 0)
-    }
-
     handleSelectRow = (event, itemId) => {
         if (this.state.selected === itemId) {
             this.setState({ selected: '' })
@@ -40,16 +36,6 @@ class Cart extends Component{
         this.props.handleCartRemoveItem(itemId)
     }
 
-    handleCartMinusItem = () => {
-        const itemId = this.state.selected
-        this.props.handleCartMinusItem(itemId)
-    }
-
-    handleCartPlusItem = () => {
-        const itemId = this.state.selected
-        this.props.handleCartPlusItem(itemId)
-    }
-
     render() {
         const { classes, cart }= this.props
         const cartItems = []
@@ -58,7 +44,6 @@ class Cart extends Component{
             cartItems.push(value)
         }
 
-        const invoiceSubtotal = this.handleSubtotal(cartItems)
         return(
             <>
                 <TableContainer component={Paper}>
@@ -67,9 +52,7 @@ class Cart extends Component{
                             <TableRow>
                                 <TableCell>#</TableCell>
                                 <TableCell align="right">Наименование</TableCell>
-                                <TableCell align="right">Количество</TableCell>
-                                <TableCell align="right">цена</TableCell>
-                                <TableCell align="right">Сумма</TableCell>
+                                <TableCell align="right">Цена</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -83,16 +66,13 @@ class Cart extends Component{
                                     { idx+1 }
                                 </TableCell>
                                 <TableCell align="right">{item.name}</TableCell>
-                                <TableCell align="right">{item.quantity}</TableCell>
                                 <TableCell align="right">{item.price}</TableCell>
-                                <TableCell align="right">{item.quantity * item.price}</TableCell>
-
                             </TableRow>
                         ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Typography align="right">Итого: { invoiceSubtotal }</Typography>
+                <Typography align="right">Итого: { Object.keys(this.props.cart).length }</Typography>
                 <div className={ classes.buttonGroup }>
                     <Button 
                         onClick={ this.props.hanldeCartDelete } 
@@ -107,23 +87,7 @@ class Cart extends Component{
                         variant="contained">
                             Удалить
                     </Button>
-                    <Button 
-                        onClick={ this.handleCartPlusItem } 
-                        disabled={ this.state.selected === '' } 
-                        color="secondary" 
-                        variant="contained">
-                            +1
-                    </Button>
-                    <Button 
-                        onClick={ this.handleCartMinusItem } 
-                        disabled={ this.state.selected === '' } 
-                        color="secondary" 
-                        variant="contained">
-                            -1
-                    </Button>
                 </div>
-                
-
             </>
         )
     }

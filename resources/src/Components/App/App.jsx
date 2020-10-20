@@ -9,7 +9,7 @@ import Aside from 'components/Aside/Aside'
 import Cart from 'components/Cart/Cart'
 import Cabinet from 'components/Cabinet/Cabinet'
 import { LessonContainer } from 'containers/LessonContainer'
-import { HeaderContainer } from 'containers/HeaderContainer'
+import HeaderContainer from 'containers/HeaderContainer'
 import AlertShow from 'components/AlertShow/AlertShow'
 import LoginPage from 'components/LoginPage/LoginPage'
 import { withStyles } from '@material-ui/core/styles'
@@ -67,10 +67,7 @@ class App extends Component {
         this.props.handleCloseAlert(value)
     }
   
-    handleSelectLesson = (id) => {
-        this.props.handleSelectLesson(id)
-    }
-
+    
     handleAlert = (value, type = 'inform', isSelect = false, messageId) => {
         this.props.handleShowAlert({ value, type, isSelect, messageId })
     }
@@ -81,7 +78,7 @@ class App extends Component {
             <Fragment>     
                 <HeaderContainer title={ this.state.title } />
                 <div className={ classes.container }>
-                    <Aside handleMobileDrawerOpen={ this.props.handleMobileDrawerOpen } mobileDrawer={ this.props.mobileDrawer } />
+                    <Aside handleMobileDrawerOpen={ this.props.mobileDrawerStateSetAction } mobileDrawer={ this.props.mobileDrawer } />
                     <main className={ classes.main }>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link to="/" replace>
@@ -96,10 +93,10 @@ class App extends Component {
                                 </Route>
                                 <Route path='/lessons' exact >
                                     <LessonList 
-                                        handleCartAdd = { this.props.handleCartAdd }
+                                        handleCartAdd = { this.props.cartAddAction }
                                         lessons={ this.props.lessons } 
-                                        handleDeleteItem={ this.props.handleDeleteItem }
-                                        handleSelectLesson={ this.handleSelectLesson }/>
+                                        handleDeleteItem={ this.props.deleteLesonAction }
+                                        handleSelectLesson={ this.props.selectLessonAction }/>
                                 </Route>
                                 <Route path='/login' exact >
                                     <LoginPage />
