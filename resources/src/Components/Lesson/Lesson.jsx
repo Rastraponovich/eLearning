@@ -24,6 +24,11 @@ const styles = theme => ({
 
 class Lesson extends Component{
     
+    handleDeleteLesson = () => {
+        const { deleteLesonAction, lessonId } = this.props
+        deleteLesonAction(lessonId)
+    }
+
     render() {
         const { classes, lesson } = this.props
         
@@ -72,7 +77,7 @@ class Lesson extends Component{
                                 назад
                             </Button>
                         </Link>
-                        <IconButton aria-label="delete" color="primary">
+                        <IconButton aria-label="delete" color="primary" onClick={ this.handleDeleteLesson }>
                             <DeleteIcon />
                         </IconButton>
                     </CardActions>

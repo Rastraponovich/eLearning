@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Lesson from 'components/Lesson/Lesson'
-import { lessonsLoadAction } from 'actions/lessons'
+import { lessonsLoadAction, deleteLesonAction } from 'actions/lessons'
 
 const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({ lessonsLoadAction }, dispatch)
+    bindActionCreators({ lessonsLoadAction, deleteLesonAction }, dispatch)
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
