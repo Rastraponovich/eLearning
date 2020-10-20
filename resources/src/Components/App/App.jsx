@@ -6,6 +6,8 @@ import LessonList from 'components/LessonList/LessonList'
 import MainPage from 'components/MainPage/MainPage'
 import CreateLesson from 'components/CreateLesson/CreateLesson'
 import Aside from 'components/Aside/Aside'
+import Cart from 'components/Cart/Cart'
+import Cabinet from 'components/Cabinet/Cabinet'
 import { LessonContainer } from 'containers/LessonContainer'
 import { HeaderContainer } from 'containers/HeaderContainer'
 import AlertShow from 'components/AlertShow/AlertShow'
@@ -87,13 +89,14 @@ class App extends Component {
                             </Link>
                             <Typography color="textPrimary">Breadcrumb</Typography>
                         </Breadcrumbs>
-                        <Container fullWidth>
+                        <Container maxWidth="xl">
                             <Switch>
                                 <Route path='/' exact >
                                     <MainPage />
                                 </Route>
                                 <Route path='/lessons' exact >
                                     <LessonList 
+                                        handleCartAdd = { this.props.handleCartAdd }
                                         lessons={ this.props.lessons } 
                                         handleDeleteItem={ this.props.handleDeleteItem }
                                         handleSelectLesson={ this.handleSelectLesson }/>
@@ -108,6 +111,12 @@ class App extends Component {
                                     <CreateLesson 
                                         handleCreateLesson={this.props.handleCreateLesson} 
                                         handleRedirect={ this.props.handleRedirect } />
+                                </Route>
+                                <Route path='/cabinet' exact>
+                                    <Cabinet profile={ this.props.profile }/>
+                                </Route>
+                                <Route path='/cart' exact>
+                                    <Cart cart={ this.props.cart } hanldeCartDelete={ this.props.cartDeleteAction }/>
                                 </Route>
                                 <Route path='*'>
                                     <h2>Error</h2>

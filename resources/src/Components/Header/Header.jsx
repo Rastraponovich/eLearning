@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const drawerWidth = 150
 const mobileDrawerWidth = 275
@@ -171,9 +172,12 @@ export default function Header(props) {
         </IconButton>
         <p>Уведомления</p>
       </MenuItem>
-      <MenuItem>
-        <Profile profile={ props.profile } />
-      </MenuItem>
+        {/* <Profile profile={ props.profile } /> */}
+        <Link to="/cabinet" replace>
+          <MenuItem onClick={ handleMenuClose }>
+            <p>Профиль</p>
+          </MenuItem>
+        </Link>
       <MenuItem onClick={ handleMenuClose }>
         <p>Выход</p>
       </MenuItem>
@@ -230,6 +234,11 @@ export default function Header(props) {
             color="inherit"
           >
             <Avatar src={ props.profile.avatar } />
+          </IconButton>
+          <IconButton aria-label="show 1 goods in cart" color="inherit">
+            <Badge badgeContent={1} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
           </IconButton>
         </div>
         <div className={ classes.sectionMobile }>

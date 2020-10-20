@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { List, ListItem, ListItemText, Paper, Typography, Collapse, ListItemIcon } from '@material-ui/core'
-import StarBorder from '@material-ui/icons/StarBorder'
-import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
+import { List, ListItem, ListItemText, Paper, Typography, Divider, ListItemIcon } from '@material-ui/core'
+import CreateLesson from 'components/CreateLesson/CreateLesson'
 
 const styles = theme => ({
     root: {
@@ -83,7 +81,35 @@ class Navigation extends Component{
                         />
                     </ListItem>
                 </Link>
+                <Divider />
+                <Link className={classes.link} to='/cabinet' replace>
+                    <ListItem button>
+                        <ListItemText primary={
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                className={classes.inline}
+                                color="textPrimary">
+                                    Личный кабинет
+                            </Typography> }
+                        />
+                    </ListItem>
+                </Link>
+                <Link className={classes.link} to='/cart' replace>
+                    <ListItem button>
+                        <ListItemText primary={
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                className={classes.inline}
+                                color="textPrimary">
+                                    Корзина
+                            </Typography> }
+                        />
+                    </ListItem>
+                </Link>
             </List>
+            
         )
     }
 }

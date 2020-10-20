@@ -8,6 +8,7 @@ import { alertLoadAction, alertCloseInformAction, alertSendInformAction } from '
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
 import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
 import { mobileDrawerStateLoadAction, mobileDrawerStateSetAction } from 'actions/header'
+import { cartLoadAction, cartAddAction, cartDeleteAction } from 'actions/cart'
 
 class AppContainerClass extends Component {
 
@@ -17,17 +18,20 @@ class AppContainerClass extends Component {
             popup, 
             lessons,
             header,
+            cart,
             alertLoadAction, 
             profileLoadAction,
             lessonsLoadAction, 
         } = this.props
         
-        if (!Object.keys(lessons).length) {
+        if (!Object.keys(lessons).length || !Object.keys(cart).length) {
             lessonsLoadAction()
             mobileDrawerStateLoadAction()
+            cartLoadAction()
+
         }
 
-        if (!profile.length || !popup.length) {
+        if (!profile.length || !popup.length ) {
             profileLoadAction()
             alertLoadAction()
         }
@@ -80,11 +84,25 @@ class AppContainerClass extends Component {
         mobileDrawerStateSetAction(!mobileDrawer)
     }
 
+    handleCartAdd = (data) => {
+        const { cart } = this.props
+        let quantity
+        if (cart[data.id]) {
+            quantity = cart[data.id].quantity+1
+        } else {
+            quantity = 1
+        }
+        
+        data.quantity = quantity
+        this.props.cartAddAction(data)
+    }
+
     render() {
         return (
             <ConnectedRouter history={ history }>     
                 <App
                     { ...this.props } 
+                    handleCartAdd={ this.handleCartAdd }
                     handleMobileDrawerOpen={ this.handleMobileDrawerOpen }
                     handleRedirect={ this.handleRedirect }
                     handleDeleteItem={ this.handleDeleteItem }
@@ -96,11 +114,11 @@ class AppContainerClass extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state)
     const { popup } = state.alert
     const { mobileDrawer } = state.header
     const { profile } = state.profile
     const { lessons, lessonId } = state.lessons
+    const { cart } = state.cart
     const { match } = ownProps
 
     return {
@@ -108,7 +126,8 @@ const mapStateToProps = (state, ownProps) => {
         mobileDrawer,
         profile,
         lessons,
-        lessonId
+        lessonId,
+        cart
     }
 }
 
@@ -126,6 +145,10 @@ const mapDispatchToProps = (dispatch) => {
         redirect: (value) => dispatch(push(`/${value}`)),
         mobileDrawerStateLoadAction: () => dispatch(mobileDrawerStateLoadAction()),
         mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
+        cartLoadAction: () => dispatch(cartLoadAction()),
+        cartDeleteAction: () => dispatch(cartDeleteAction()),
+        cartAddAction: (data) => dispatch(cartAddAction(data)),
+
     }
 }
 

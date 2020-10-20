@@ -8,7 +8,7 @@ export const lessonsEntry = {
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: '31 рубль'
+        price: 31
     },
     dk3t0m: {
         id: 'dk3t0m',
@@ -16,7 +16,7 @@ export const lessonsEntry = {
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: '71 рубль'
+        price: 71
     },
     fv1hud: {
         id: 'fv1hud',
@@ -24,7 +24,7 @@ export const lessonsEntry = {
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: 'Бесплатно'
+        price: 0
     },
     tiqD0R: {
         id: 'tiqD0R',
@@ -32,6 +32,6 @@ export const lessonsEntry = {
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: '151 рубль'
+        price: 151
     }
 }

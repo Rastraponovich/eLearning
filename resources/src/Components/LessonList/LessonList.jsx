@@ -41,7 +41,6 @@ const styles = theme => ({
 class LessonList extends Component{
 
     handleSelectLesson = (id) => {
-        console.log(id)
         this.props.handleSelectLesson(id)
     }
 
@@ -64,6 +63,7 @@ class LessonList extends Component{
                                 key={item.id} 
                                 { ...lessons[item] } 
                                 lessonId={item} 
+                                handleCartAdd={ this.props.handleCartAdd }
                                 handleDeleteItem={ this.props.handleDeleteItem }
                                 handleSelectLesson={ this.handleSelectLesson } /> 
                         </Grid>
