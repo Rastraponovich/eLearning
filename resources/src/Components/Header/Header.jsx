@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { AppBar, Toolbar, IconButton, Typography, Hidden, SwipeableDrawer, Avatar,
   InputBase, Badge, MenuItem, Menu, Drawer, Divider, CardMedia } from '@material-ui/core'
 import Profile from 'components/Profile/Profile'
@@ -18,7 +18,12 @@ const mobileDrawerWidth = 275
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-},
+  },
+
+  link: {
+    alignSelf: 'center',
+    color: 'inherit'
+  },
 
   menuButton: {
     marginRight: theme.spacing(2),
@@ -130,6 +135,12 @@ export default function Header(props) {
     handleMobileMenuClose()
   }
 
+  const handleCartOpen = () => {
+    setAnchorEl(null)
+    handleMobileMenuClose()
+    props.redirect('cart')
+  }
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
   }
@@ -182,12 +193,20 @@ export default function Header(props) {
         </IconButton>
         <p>Уведомления</p>
       </MenuItem>
+      <MenuItem onClick={ handleCartOpen }>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={hanldeCartItemCount()} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Корзина</p>
+      </MenuItem>
         {/* <Profile profile={ props.profile } /> */}
-        <Link to="/cabinet" replace>
-          <MenuItem onClick={ handleMenuClose }>
-            <p>Профиль</p>
-          </MenuItem>
-        </Link>
+      <Link to="/cabinet" replace>
+        <MenuItem onClick={ handleMenuClose }>
+          <p>Профиль</p>
+        </MenuItem>
+      </Link>
       <MenuItem onClick={ handleMenuClose }>
         <p>Выход</p>
       </MenuItem>
@@ -245,11 +264,15 @@ export default function Header(props) {
           >
             <Avatar src={ props.profile.avatar } />
           </IconButton>
+          <Link to='/cart' replace className={ classes.link }>
+
           <IconButton aria-label="show 1 goods in cart" color="inherit">
             <Badge badgeContent={hanldeCartItemCount()} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
+          </Link>
+
         </div>
         <div className={ classes.sectionMobile }>
           <IconButton

@@ -8,7 +8,7 @@ import { alertLoadAction, alertCloseInformAction, alertSendInformAction } from '
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
 import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
 import { mobileDrawerStateLoadAction, mobileDrawerStateSetAction } from 'actions/header'
-import { cartLoadAction, cartAddAction, cartDeleteAction } from 'actions/cart'
+import { cartLoadAction, cartAddAction, cartDeleteAction, cartRemoveAction, cartMinusItemAction, cartPlusItemAction } from 'actions/cart'
 
 class AppContainerClass extends Component {
 
@@ -148,6 +148,9 @@ const mapDispatchToProps = (dispatch) => {
         cartLoadAction: () => dispatch(cartLoadAction()),
         cartDeleteAction: () => dispatch(cartDeleteAction()),
         cartAddAction: (data) => dispatch(cartAddAction(data)),
+        cartRemoveAction: (itemId) => dispatch(cartRemoveAction(itemId)),
+        cartPlusItemAction: (itemId) => dispatch(cartPlusItemAction(itemId)),
+        cartMinusItemAction: (itemId) => dispatch(cartMinusItemAction(itemId)),
 
     }
 }

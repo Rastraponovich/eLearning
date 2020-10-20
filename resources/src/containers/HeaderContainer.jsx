@@ -32,7 +32,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status))
+        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
+        redirect: (value) => dispatch(push(`/${value}`)),
+
     }
 }
 

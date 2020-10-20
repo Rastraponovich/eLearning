@@ -116,7 +116,12 @@ class App extends Component {
                                     <Cabinet profile={ this.props.profile }/>
                                 </Route>
                                 <Route path='/cart' exact>
-                                    <Cart cart={ this.props.cart } hanldeCartDelete={ this.props.cartDeleteAction }/>
+                                    <Cart 
+                                    cart={ this.props.cart } 
+                                    handleCartPlusItem={ this.props.cartPlusItemAction }
+                                    handleCartMinusItem={ this.props.cartMinusItemAction }
+                                    handleCartRemoveItem={ this.props.cartRemoveAction }
+                                    hanldeCartDelete={ this.props.cartDeleteAction }/>
                                 </Route>
                                 <Route path='*'>
                                     <h2>Error</h2>
