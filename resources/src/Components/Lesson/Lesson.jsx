@@ -23,15 +23,14 @@ const styles = theme => ({
   })
 
 class Lesson extends Component{
-
     
     render() {
-        const { classes } = this.props
+        const { classes, lesson } = this.props
         
-        if (this.props.lesson === undefined) {
+        if (lesson === undefined) {
             return <div>Урок не найден вернитесь на главную!</div>
         }
-        const { id, category, content, title, price, cover } = this.props.lesson
+        const { id, category, content, title, price, cover } = lesson
         
         return(
                 <Card className={ classes.root }>

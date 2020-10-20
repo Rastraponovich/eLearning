@@ -1,43 +1,29 @@
-import React, { Component, Fragment } from 'react'
-import { Container } from '@material-ui/core'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Lesson from 'components/Lesson/Lesson'
 import { lessonsLoadAction } from 'actions/lessons'
-import ScrollableFeed from 'react-scrollable-feed'
 
+const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({ lessonsLoadAction }, dispatch)
 
-class LessonContainerClass extends Component {
-    render(){
-        const { lessons, lessonId } = this.props
-        const currentLesson = this.props.lessons[this.props.lessonId]
-        return(
-            <>
-            <Container maxWidth="md">
-                <ScrollableFeed>
-                    <Lesson lesson={ currentLesson } />
-                </ScrollableFeed>
-               
-            </Container>
-               
-            </>
-        )
-    }
-}
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
-const mapDispatchToProps = (dispatch) => {
     return {
-        lessonsLoadAction: () => dispatch(lessonsLoadAction()),
+        ...stateProps,
+        ...dispatchProps
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const { match } = ownProps
-    const { lessonId, lessons } = state.lessons
+const mapStateToProps = (store, props) => {
+    const { match } = props
+    const { lessonId, lessons } = store.lessons
+    const lesson = lessons[lessonId]
 
     return {
         lessonId,
-        lessons
+        lessons,
+        lesson
     }
 }
 
-export const LessonContainer = connect(mapStateToProps, mapDispatchToProps)(LessonContainerClass)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Lesson)
