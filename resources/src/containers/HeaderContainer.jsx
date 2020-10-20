@@ -21,17 +21,20 @@ class HeaderContainerClass extends Component {
 const mapStateToProps = (state, ownProps) => {
     const { profile } = state.profile
     const { mobileDrawer } = state.header
+    const { cart } = state.cart
+
     return {
         profile,
         mobileDrawer,
+        cart
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status))
-        // deleteLesonAction: (data) => dispatch(deleteLesonAction(data)),
-        // redirect: (value) => dispatch(push(`/${value}`)),
+        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
+        redirect: (value) => dispatch(push(`/${value}`)),
+
     }
 }
 
