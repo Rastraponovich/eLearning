@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { mobileDrawerStateSetAction } from 'actions/header'
 import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
+import { logoutAction } from 'actions/init'
 
 import Header from 'components/Header/Header'
 
@@ -19,6 +20,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({ mobileDrawerStateSetAction, redirect: push, profileChangeNameAction }, dispatch)
+    bindActionCreators({ mobileDrawerStateSetAction, redirect: push, profileChangeNameAction, logoutAction }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -1,4 +1,4 @@
-import { INIT } from 'actions/init'
+import { INIT, LOGOUT } from 'actions/init'
 
 const initialState = {
     token: ''
@@ -9,6 +9,9 @@ export const initReducer = (state = initialState, action) => {
         
         case INIT: 
             return { ...state, token: '' }
+
+        case LOGOUT:
+            return { ...state, token: '1' }
 
         default: 
             return state

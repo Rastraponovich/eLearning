@@ -134,6 +134,11 @@ export default function Header(props) {
     setMobileMoreAnchorEl(event.currentTarget)
   }
 
+  const handleLogout = () => {
+    setAnchorEl(null)
+    props.logoutAction()
+  }
+
   const menuId = 'primary-search-account-menu'
 
   const renderMenu = (
@@ -149,7 +154,7 @@ export default function Header(props) {
       <MenuItem onClick={ handleMenuClose }>
         <Profile profile={ props.profile } handleNameChange={ props.profileChangeNameAction }/>
       </MenuItem>
-      <MenuItem onClick={ handleMenuClose }>
+      <MenuItem onClick={ handleLogout }>
         <p>Выход</p>
       </MenuItem>
     </Menu>
@@ -195,7 +200,7 @@ export default function Header(props) {
           <p>Профиль</p>
         </MenuItem>
       </Link>
-      <MenuItem onClick={ handleMenuClose }>
+      <MenuItem onClick={ handleLogout }>
         <p>Выход</p>
       </MenuItem>
     </Menu>

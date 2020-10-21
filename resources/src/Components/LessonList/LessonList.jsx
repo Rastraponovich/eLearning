@@ -53,7 +53,7 @@ export default function LessonList(props) {
             <Divider className={ classes.spacing } />
             <Grid container className={ classes.root } spacing={2}>
                 { lessonsItems.map((item) => 
-                    <Grid  item xs={12} sm={6} md={4} lg={3} xl={6} key={ item }>
+                    <Grid  item xs={12} sm={6} md={4} xl={6} key={ item }>
                         <LessonItem 
                             key={item.id} 
                             { ...lessons[item] } 

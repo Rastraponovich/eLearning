@@ -58,7 +58,7 @@ export default function Cabinet(props) {
                     </div>
                     
                 </Grid>
-                <Divider variant="vertical" flexItem/>
+                <Divider orientation="vertical" flexItem/>
                 <Grid container item xs={12} sm={3} justify="center" className={ classes.root }>
                     <Typography className={ classes.title } align="center">Панель действий</Typography>
                     <Button variant="outlined" color="primary">

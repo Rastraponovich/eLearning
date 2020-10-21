@@ -7,7 +7,7 @@ import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
 import { lessonsLoadAction, selectLessonAction, createLessonAction, deleteLesonAction } from 'actions/lessons'
 import { mobileDrawerStateLoadAction, mobileDrawerStateSetAction } from 'actions/header'
 import { cartLoadAction, cartAddAction, cartDeleteAction, cartRemoveAction } from 'actions/cart'
-import { initAction } from 'actions/init'
+import { initAction, logoutAction } from 'actions/init'
 
 // handleShowAlert = (value, type = 'inform', isSelect = false, messageId) => {
 //     this.props.alertSendInformAction(value, type, isSelect, messageId)
@@ -48,6 +48,7 @@ const mapDispatchToProps = (dispatch) =>
         selectLessonAction,
         createLessonAction,
         deleteLesonAction,
+        logoutAction,
         redirect: push,
         mobileDrawerStateLoadAction,
         mobileDrawerStateSetAction,
