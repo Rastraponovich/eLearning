@@ -12,7 +12,8 @@ export const profileReducer = (state = initialState, action) => {
             return { ...state, profile }
             
         case PROFILE_CHANGE_NAME:
-            return { ...state, profile: {
+            return { ...state,
+                    profile: {
                     ...state.profile,
                     firstName: action.payload.firstName === undefined ? state.profile.firstName : action.payload.firstName, 
                     lastName: action.payload.lastName === undefined ? state.profile.lastName : action.payload.lastName 
