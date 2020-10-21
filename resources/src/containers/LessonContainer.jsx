@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { push } from 'connected-react-router'
 import Lesson from 'components/Lesson/Lesson'
 import { lessonsLoadAction, deleteLesonAction } from 'actions/lessons'
 
 const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({ lessonsLoadAction, deleteLesonAction }, dispatch)
+    bindActionCreators({ lessonsLoadAction, deleteLesonAction, redirect: push }, dispatch)
 
 const mapStateToProps = (store, props) => {
     const { match } = props

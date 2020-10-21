@@ -78,17 +78,13 @@ export default function Profile(props) {
         }
     }
     const handleConfirm = () => {
-        const data = { firstName, lastName }
-
-        props.handleNameChange(data)
+        props.handleNameChange({ firstName, lastName })
         handleClose()
     } 
 
-    const error = props.error ? 'Data is not set' : 'OK'
     return (
         <div className={ classes.regButton }>
             <p onClick={ handleClickOpen } >Профиль</p>
-            {/* <Avatar className="avatar" onClick={ handleClickOpen } src={ props.profile.avatar }/> */}
             <Dialog
                 open={ open }
                 fullWidth
@@ -105,8 +101,6 @@ export default function Profile(props) {
                             </Button>
                         </Link>
                     </div>
-                    
-                    
                 </DialogTitle>
                 <DialogContent>
                     <Avatar className="avatar" className={ classes.large } src={ props.profile.avatar }/>
@@ -151,14 +145,14 @@ export default function Profile(props) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose} color="primary">
+                    <Button autoFocus onClick={ handleClose } color="primary">
                         Отмена
                     </Button>
-                    <Button onClick={handleConfirm} color="primary">
+                    <Button onClick={ handleConfirm } color="primary">
                         Потдвердить
                     </Button>
                 </DialogActions>
             </Dialog>
-    </div>
+        </div>
     )
 }

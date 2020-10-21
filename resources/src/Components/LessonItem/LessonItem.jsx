@@ -1,13 +1,12 @@
-import React, { Fragment, Component } from 'react'
-import { withStyles  } from '@material-ui/core/styles'
+import React, { Fragment } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { IconButton, Card, CardActionArea, CardMedia, 
          CardContent, Typography, CardActions, Button, 
          Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { ThreeSixty } from '@material-ui/icons'
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 370,
     },
@@ -19,114 +18,103 @@ const styles = theme => ({
         padding: theme.spacing(0, 1),
         justifyContent: 'center',
     },
-  });
+  }))
 
-  class LessonItem extends Component{
+export default function LessonItem(props) {
+    const classes = useStyles()
+    const { id, title, content, category, price, cover, lessonId } = props
+    const [open, setOpen] = React.useState(false)
+    const [deleteDialog, setDeleteDialog] = React.useState(false)
 
-    state = {
-        open: false,
-        deleteDialog: false
+    const handleOpen = () => {
+        setOpen(!open)
     }
 
-    handleOpen = () => {
-        this.setState({ open: !this.state.open })
+    const handleDialogClose = () => {
+        setDeleteDialog(false)
     }
 
-    handleDeleteItem = () => {
-        this.props.handleDeleteItem(this.props.id)
-        this.handleDialogClose()
+    const handleDeleteItem = () => {
+        props.handleDeleteItem(id)
+        handleDialogClose()
     }
 
-    handleDialogClose = () => {
-        this.setState({ deleteDialog: false })
+    const handleDialogOpen = () => {
+        setDeleteDialog(true)
     }
 
-    handleDialogOpen = () => {
-        this.setState({ deleteDialog: true })
+    const handleSelectLesson = () => {
+        props.handleSelectLesson(lessonId)
     }
 
-    handleSelectLesson = () => {
-        this.props.handleSelectLesson(this.props.lessonId)
+    const handleClose = () => {
+        setOpen(false)
     }
 
-    handleClose = () => {
-        this.setState( { open: false } )
+    const handleCartAdd = () => {
+        const data = { id, name: props.title, price }
+        props.handleCartAdd(data)
     }
 
-    handleCartAdd = () => {
-        const data = {
-            id: this.props.id,
-            name: this.props.title,
-            price: this.props.price,
-        }
-
-        this.props.handleCartAdd(data)
-    }
-    
-    render() {
-        const { id, title, content, category, price, cover, classes, lessonId } = this.props
-        return(
-            <>
-            <Card elevation={5} key={ id }>
-                <CardActionArea onClick={ this.props.modal ? this.handleClose : this.handleOpen }>
-                    <CardMedia
-                        className={ classes.media }
-                        image={ cover }
-                        title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            { title }
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            { content } { id }
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Категория: { category }
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            цена: { price }
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions className={ classes.cardAction }>
-                    <Button size="small" color="primary" variant="contained" onClick={ this.handleCartAdd } >
-                        В корзину
+    return(
+        <>
+        <Card elevation={5} key={ id }>
+            <CardActionArea onClick={ props.modal ? handleClose : handleOpen }>
+                <CardMedia
+                    className={ classes.media }
+                    image={ cover }
+                    title="Contemplative Reptile"
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        { title }
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        { content } { id }
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Категория: { category }
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        цена: { price }
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions className={ classes.cardAction }>
+                <Button size="small" color="primary" variant="contained" onClick={ handleCartAdd } >
+                    В корзину
+                </Button>
+                <Link className="link" to={ `/lesson/${id}` } replace>
+                    <Button onClick={ handleSelectLesson } size="small" variant="contained" color="primary">
+                        Подробнее
                     </Button>
-                    <Link className="link" to={ `/lesson/${id}` } replace>
-                        <Button onClick={ this.handleSelectLesson } size="small" variant="contained" color="primary">
-                            Подробнее
-                        </Button>
-                    </Link>
-                    <IconButton aria-label="delete" color="primary" onClick={ this.handleDialogOpen }>
-                        <DeleteIcon />
-                    </IconButton>
-                </CardActions>
-            </Card>
-            <Dialog fullWidth onClose={ this.handleClose } open={ this.state.open }>
-                <LessonItem { ...this.props } modal={true} />
-            </Dialog>
-            <Dialog onClose={ this.handleDialogClose } open={ this.state.deleteDialog } aria-labelledby="draggable-dialog-title">
-                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                    Подтверждение
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Вы действительно хотите удалить данный диалог?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button autoFocus onClick={ this.handleDialogClose } color="primary">
-                        Нет
-                    </Button>
-                    <Button onClick={ this.handleDeleteItem } color="secondary">
-                        Да
-                    </Button>
-                </DialogActions>
-            </Dialog>
-            </>
-        )
-    }
+                </Link>
+                <IconButton aria-label="delete" color="primary" onClick={ handleDialogOpen }>
+                    <DeleteIcon />
+                </IconButton>
+            </CardActions>
+        </Card>
+        <Dialog fullWidth onClose={ handleClose } open={ open }>
+            <LessonItem { ...props } modal={true} />
+        </Dialog>
+        <Dialog onClose={ handleDialogClose } open={ deleteDialog } aria-labelledby="draggable-dialog-title">
+            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                Подтверждение
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Вы действительно хотите удалить данный диалог?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button autoFocus onClick={ handleDialogClose } color="primary">
+                    Нет
+                </Button>
+                <Button onClick={ handleDeleteItem } color="secondary">
+                    Да
+                </Button>
+            </DialogActions>
+        </Dialog>
+        </>
+    )
 }
-
-export default withStyles(styles)(LessonItem)

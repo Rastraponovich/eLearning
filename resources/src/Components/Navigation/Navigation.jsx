@@ -1,10 +1,8 @@
-import React, { Component, Fragment } from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import { List, ListItem, ListItemText, Paper, Typography, Divider, ListItemIcon } from '@material-ui/core'
-import CreateLesson from 'components/CreateLesson/CreateLesson'
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         // backgroundColor: theme.palette.background.paper,
@@ -20,98 +18,44 @@ const styles = theme => ({
     nested: {
         paddingLeft: theme.spacing(4),
     },
-})
+}))
 
-class Navigation extends Component{
+export default function Navigation(props) {
+    const classes = useStyles()
 
-    render() {
-        const { classes } = this.props
-        
-        return(
-            <List component="nav" className={classes.root}>
-                <Link className={classes.link} to='/' replace>
-                    <ListItem button>
-                        <ListItemText primary={
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary">
-                                    Главная страница
-                            </Typography> }
-                        />
-                    </ListItem>
-                </Link>
-                <Link className={classes.link} to='/lessons' replace>
-                    <ListItem button>
-                        <ListItemText primary={
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary">
-                                    Список уроков
-                            </Typography> }
-                        />
-                    </ListItem>
-                </Link>
-                <Link className={classes.link} to='/login' replace>
-                    <ListItem button>
-                        <ListItemText primary={
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary">
-                                    Авторизация
-                            </Typography> }
-                        />
-                    </ListItem>
-                </Link>
-                <Link className={classes.link} to='/createLesson' replace>
-                    <ListItem button>
-                        <ListItemText primary={
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary">
-                                    Создание урока
-                            </Typography> }
-                        />
-                    </ListItem>
-                </Link>
-                <Divider />
-                <Link className={classes.link} to='/cabinet' replace>
-                    <ListItem button>
-                        <ListItemText primary={
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary">
-                                    Личный кабинет
-                            </Typography> }
-                        />
-                    </ListItem>
-                </Link>
-                <Link className={classes.link} to='/cart' replace>
-                    <ListItem button>
-                        <ListItemText primary={
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary">
-                                    Корзина
-                            </Typography> }
-                        />
-                    </ListItem>
-                </Link>
-            </List>
-            
+    const navDictMain = [
+        { path: '/', name: 'Главная страница'},
+        { path: '/lessons', name: 'Список уроков'},
+        { path: '/login', name: 'Авторизация'},
+        { path: '/createLesson', name: 'Создание урока'},
+    ]
+
+    const navDictSecond = [
+        { path: '/cabinet', name: 'Личный кабинет'},
+        { path: '/cart', name: 'Корзина'}
+    ]
+
+    const renderNavMainList = (value) => (
+        value.map((item, idx) => 
+            <ListItem key={idx} button onClick={ () => props.redirect(`${item.path}`) }>
+                <ListItemText primary={
+                    <Typography
+                        component="span"
+                        variant="body2"
+                        className={ classes.inline }
+                        color="textPrimary">
+                            { item.name }
+                    </Typography> }
+                />
+            </ListItem>
         )
-    }
-}
+    )
 
-export default withStyles(styles)(Navigation)
+    return(
+        <List component="nav" className={ classes.root }>
+            { renderNavMainList(navDictMain) }
+            <Divider />
+            { renderNavMainList(navDictSecond) }
+       </List>
+    )
+}

@@ -94,7 +94,7 @@ class CreateLesson extends Component{
 
     handleConfirm = () => {
         const { id, title, content, price, category } = this.state
-        let cover = this.state.cover === '' ? BULK_IMAGE : this.state.cover
+        const cover = this.state.cover === '' ? BULK_IMAGE : this.state.cover
         
         if (title !== '' && content !== '' && price !== '' && category !== '' ) {
             this.props.handleCreateLesson({
@@ -106,7 +106,7 @@ class CreateLesson extends Component{
                 category,
                 lessonId: id
             }) 
-            this.props.handleRedirect(`lesson/${id}`)
+            this.props.redirect(`lesson/${id}`)
         } else {
             alert('что-то не заполнено')
         }

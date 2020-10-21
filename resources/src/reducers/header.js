@@ -12,10 +12,7 @@ export const headerReducer = (state = initialState, action) => {
                
 
         case MOBILE_DRAWER_STATE_SET:
-            return { 
-                ...state,
-                mobileDrawer: !state.mobileDrawer
-            }
+            return { ...state, mobileDrawer: !state.mobileDrawer }
         
         default: 
             return state

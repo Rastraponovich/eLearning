@@ -2,6 +2,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { mobileDrawerStateSetAction } from 'actions/header'
+import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
+
 import Header from 'components/Header/Header'
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,16 +19,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({ mobileDrawerStateSetAction }, dispatch)
-    
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const redirect = (path) => { push(`/${path}`) }
-    
+    bindActionCreators({ mobileDrawerStateSetAction, redirect: push, profileChangeNameAction }, dispatch)
 
-    return {
-        ...stateProps,
-        redirect
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

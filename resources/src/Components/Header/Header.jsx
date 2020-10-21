@@ -1,10 +1,9 @@
-import React, { Fragment, Component } from 'react'
+import React from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
-import { Link, Redirect } from 'react-router-dom'
-import { AppBar, Toolbar, IconButton, Typography, Hidden, SwipeableDrawer, Avatar,
-  InputBase, Badge, MenuItem, Menu, Drawer, Divider, CardMedia } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { AppBar, Toolbar, IconButton, Typography, Avatar,
+  InputBase, Badge, MenuItem, Menu, } from '@material-ui/core'
 import Profile from 'components/Profile/Profile'
-import Navigation from 'components/Navigation/Navigation'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import MailIcon from '@material-ui/icons/Mail'
@@ -148,7 +147,7 @@ export default function Header(props) {
       onClose={ handleMenuClose }
     >
       <MenuItem onClick={ handleMenuClose }>
-        <Profile profile={ props.profile }/>
+        <Profile profile={ props.profile } handleNameChange={ props.profileChangeNameAction }/>
       </MenuItem>
       <MenuItem onClick={ handleMenuClose }>
         <p>Выход</p>
@@ -191,7 +190,6 @@ export default function Header(props) {
         </IconButton>
         <p>Корзина</p>
       </MenuItem>
-        {/* <Profile profile={ props.profile } /> */}
       <Link to="/cabinet" replace>
         <MenuItem onClick={ handleMenuClose }>
           <p>Профиль</p>

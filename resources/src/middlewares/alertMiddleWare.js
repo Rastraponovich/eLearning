@@ -6,22 +6,12 @@ export const alertMiddleWare = store => next => action => {
 
     if (action.type === ALERT_SEND_INFORM) {
         const { value, type, isSelect, messageId } = action.payload
-        let alertType = type
-        let status = true
+        const dict = { error: 'error', warning: 'warning', inform: 'inform'}
+        const alertType = dict[type] || 'inform'
         
-        switch (type) {
-            case 'error':
-                alertType = 'error'
-                break;
-        
-            default: 'inform'
-                alertType = 'inform'
-                break;
-        }
-
         store.dispatch(alertSendAction({
             text: value,
-            status: status,
+            status: true,
             type: alertType,
             id: messageId,
             isSelect
