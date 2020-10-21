@@ -1,0 +1,72 @@
+import React, { Fragment } from 'react'
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { Typography, Divider, Fab, Container } from '@material-ui/core'
+import LessonItem from 'components/LessonItem/LessonItem'
+import ScrollableFeed from 'react-scrollable-feed'
+import AddIcon from '@material-ui/icons/Add'
+import { green } from '@material-ui/core/colors'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        paddingBottom: '2rem',
+    },
+    paper: {
+        height: 140,
+        width: 100,
+    },
+    control: {
+        padding: theme.spacing(2),
+    },
+    spacing: {
+        margin: theme.spacing(0, 0, 2, 0)
+    },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+        [theme.breakpoints.up('lg')]: {
+            bottom: 0,
+            right: theme.spacing(8) * 4, 
+        },
+        color: theme.palette.common.white,
+        backgroundColor: green[500],
+        '&:hover': {
+            backgroundColor: green[600],
+        },
+    },
+}))
+
+export default function LessonList(props) {
+    const classes = useStyles()
+    const { lessons } = props
+    const lessonsItems = []
+
+    for (let [key, value] of Object.entries(lessons)) {
+        lessonsItems.push(key)
+    }
+    
+    return(
+        <>
+            <Typography className={ classes.spacing } component="h2" variant="h4">Список Уроков</Typography>
+            <Divider className={ classes.spacing } />
+            <Grid container className={ classes.root } spacing={2}>
+                { lessonsItems.map((item) => 
+                    <Grid  item xs={12} sm={6} md={4} lg={3} xl={6} key={ item }>
+                        <LessonItem 
+                            key={item.id} 
+                            { ...lessons[item] } 
+                            lessonId={item} 
+                            handleCartAdd={ props.handleCartAdd }
+                            handleDeleteItem={ props.handleDeleteItem }
+                            handleSelectLesson={ props.handleSelectLesson } /> 
+                    </Grid>
+                    )}
+            </Grid>
+            <Fab className={ classes.fab }>
+                <AddIcon />
+            </Fab>
+        </>
+    )
+}
