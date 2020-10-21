@@ -2,8 +2,6 @@ export const CART_LOAD = 'CART_LOAD'
 export const CART_ADD = 'CART_ADD'
 export const CART_REMOVE = 'CART_REMOVE'
 export const CART_DELETE = 'CART_DELETE'
-export const CART_PLUS_ITEM = 'CART_PLUS_ITEM'
-export const CART_MINUS_ITEM = 'CART_MINUS_ITEM'
 
 
 export const cartLoadAction = () => ({
@@ -22,14 +20,4 @@ export const cartRemoveAction = (itemId) => ({
 
 export const cartDeleteAction = () => ({
     type: CART_DELETE,
-})
-
-export const cartMinusItemAction = (itemId) => ({
-    type: CART_MINUS_ITEM,
-    payload: itemId
-})
-
-export const cartPlusItemAction = (itemId) => ({
-    type: CART_PLUS_ITEM,
-    payload: itemId
 })

@@ -1,22 +1,10 @@
-import React, { Component, Fragment } from 'react'
-import Header from 'components/Header/Header'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import { mobileDrawerStateSetAction } from 'actions/header'
+import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
 
-
-class HeaderContainerClass extends Component {
-    
-    handleMobileDrawerOpen = () => {
-        const { mobileDrawer, mobileDrawerStateSetAction } = this.props
-        mobileDrawerStateSetAction(!mobileDrawer)
-    }
-
-    render() {
-        return(
-            <Header { ...this.props } handleMobileDrawerOpen={ this.handleMobileDrawerOpen }/>
-        )
-    }
-}
+import Header from 'components/Header/Header'
 
 const mapStateToProps = (state, ownProps) => {
     const { profile } = state.profile
@@ -30,12 +18,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        mobileDrawerStateSetAction: (status) => dispatch(mobileDrawerStateSetAction(status)),
-        redirect: (value) => dispatch(push(`/${value}`)),
+const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({ mobileDrawerStateSetAction, redirect: push, profileChangeNameAction }, dispatch)
 
-    }
-}
-
-export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderContainerClass)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

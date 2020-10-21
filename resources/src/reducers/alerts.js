@@ -1,4 +1,3 @@
-import update from 'react-addons-update'
 import { ALERT_LOAD, ALERT_SEND, ALERT_CLOSE } from 'actions/alerts'
 
 const initialState = {
@@ -21,16 +20,12 @@ export const alertReducer = (state = initialState, action) => {
             }
 
         case ALERT_SEND:
-            return update(state, {
-                popup: {
-                    $merge: { ...action.payload }
-                },
-            })
+            return { ...state, popup: action.payload }
         
         case ALERT_CLOSE:
-            return update(state, {
+            return { 
+                ...state,
                 popup: {
-                    $merge: {
                         text: '',
                         status: false,
                         type: '',
@@ -38,7 +33,6 @@ export const alertReducer = (state = initialState, action) => {
                         isSelect: false,
                     }
                 }
-            })
 
         default: 
             return state

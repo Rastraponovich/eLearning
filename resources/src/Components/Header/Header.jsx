@@ -1,10 +1,9 @@
-import React, { Fragment, Component } from 'react'
+import React from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
-import { Link, Redirect } from 'react-router-dom'
-import { AppBar, Toolbar, IconButton, Typography, Hidden, SwipeableDrawer, Avatar,
-  InputBase, Badge, MenuItem, Menu, Drawer, Divider, CardMedia } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { AppBar, Toolbar, IconButton, Typography, Avatar,
+  InputBase, Badge, MenuItem, Menu, } from '@material-ui/core'
 import Profile from 'components/Profile/Profile'
-import Navigation from 'components/Navigation/Navigation'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import MailIcon from '@material-ui/icons/Mail'
@@ -120,16 +119,6 @@ export default function Header(props) {
     setMobileMoreAnchorEl(null)
   }
 
-  const hanldeCartItemCount = () => {
-    const { cart } = props
-    const cartItems = []
-
-    for (let [key, value] of Object.entries(cart)) {
-        cartItems.push(value)
-    }
-    return cartItems.map(({ quantity }) => quantity).reduce((sum, i) => sum + i , 0)
-  }
-
   const handleMenuClose = () => {
     setAnchorEl(null)
     handleMobileMenuClose()
@@ -158,7 +147,7 @@ export default function Header(props) {
       onClose={ handleMenuClose }
     >
       <MenuItem onClick={ handleMenuClose }>
-        <Profile profile={ props.profile }/>
+        <Profile profile={ props.profile } handleNameChange={ props.profileChangeNameAction }/>
       </MenuItem>
       <MenuItem onClick={ handleMenuClose }>
         <p>Выход</p>
@@ -195,13 +184,12 @@ export default function Header(props) {
       </MenuItem>
       <MenuItem onClick={ handleCartOpen }>
         <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={hanldeCartItemCount()} color="secondary">
+          <Badge badgeContent={ Object.keys(props.cart).length } color="secondary">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
         <p>Корзина</p>
       </MenuItem>
-        {/* <Profile profile={ props.profile } /> */}
       <Link to="/cabinet" replace>
         <MenuItem onClick={ handleMenuClose }>
           <p>Профиль</p>
@@ -224,7 +212,7 @@ export default function Header(props) {
             aria-label="open drawer"
             aria-controls={ mobileMenuId }
             aria-haspopup="true"
-            onClick={ props.handleMobileDrawerOpen }
+            onClick={ props.mobileDrawerStateSetAction }
           >
             <MenuIcon />
           </IconButton>
@@ -267,12 +255,11 @@ export default function Header(props) {
           <Link to='/cart' replace className={ classes.link }>
 
           <IconButton aria-label="show 1 goods in cart" color="inherit">
-            <Badge badgeContent={hanldeCartItemCount()} color="secondary">
+            <Badge badgeContent= { Object.keys(props.cart).length } color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
           </Link>
-
         </div>
         <div className={ classes.sectionMobile }>
           <IconButton

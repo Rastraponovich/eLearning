@@ -6,8 +6,7 @@ export const mobileDrawerStateLoadAction = () => ({
     type: MOBILE_DRAWER_STATE_LOAD,
 })
 
-export const mobileDrawerStateSetAction = (status) => ({
-    type: MOBILE_DRAWER_STATE_SET,
-    payload: status
+export const mobileDrawerStateSetAction = () => ({
+    type: MOBILE_DRAWER_STATE_SET
 })
 

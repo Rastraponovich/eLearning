@@ -1,13 +1,13 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment } from 'react'
 import { Grid } from '@material-ui/core'
-import { withStyles  } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { Typography, Divider, Fab, Container } from '@material-ui/core'
 import LessonItem from 'components/LessonItem/LessonItem'
 import ScrollableFeed from 'react-scrollable-feed'
 import AddIcon from '@material-ui/icons/Add'
 import { green } from '@material-ui/core/colors'
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         paddingBottom: '2rem',
@@ -36,45 +36,37 @@ const styles = theme => ({
             backgroundColor: green[600],
         },
     },
-})
+}))
 
-class LessonList extends Component{
+export default function LessonList(props) {
+    const classes = useStyles()
+    const { lessons } = props
+    const lessonsItems = []
 
-    handleSelectLesson = (id) => {
-        this.props.handleSelectLesson(id)
+    for (let [key, value] of Object.entries(lessons)) {
+        lessonsItems.push(key)
     }
-
-    render() {
-        const { classes, lessons } = this.props
-        const lessonsItems = []
-
-        for (let [key, value] of Object.entries(lessons)) {
-            lessonsItems.push(key)
-        }
-        
-        return(
-            <>
-                <Typography className={ classes.spacing } component="h2" variant="h4">Список Уроков</Typography>
-                <Divider className={ classes.spacing } />
-                <Grid container className={ classes.root } spacing={2}>
-                    { lessonsItems.map((item) => 
-                        <Grid  item xs={12} sm={6} md={4} lg={3} xl={6} key={ item }>
-                            <LessonItem 
-                                key={item.id} 
-                                { ...lessons[item] } 
-                                lessonId={item} 
-                                handleCartAdd={ this.props.handleCartAdd }
-                                handleDeleteItem={ this.props.handleDeleteItem }
-                                handleSelectLesson={ this.handleSelectLesson } /> 
-                        </Grid>
-                        )}
-                </Grid>
-                <Fab className={ classes.fab }>
-                    <AddIcon />
-                </Fab>
-            </>
-        )
-    }
+    
+    return(
+        <>
+            <Typography className={ classes.spacing } component="h2" variant="h4">Список Уроков</Typography>
+            <Divider className={ classes.spacing } />
+            <Grid container className={ classes.root } spacing={2}>
+                { lessonsItems.map((item) => 
+                    <Grid  item xs={12} sm={6} md={4} lg={3} xl={6} key={ item }>
+                        <LessonItem 
+                            key={item.id} 
+                            { ...lessons[item] } 
+                            lessonId={item} 
+                            handleCartAdd={ props.handleCartAdd }
+                            handleDeleteItem={ props.handleDeleteItem }
+                            handleSelectLesson={ props.handleSelectLesson } /> 
+                    </Grid>
+                    )}
+            </Grid>
+            <Fab className={ classes.fab }>
+                <AddIcon />
+            </Fab>
+        </>
+    )
 }
-
-export default withStyles(styles)(LessonList)

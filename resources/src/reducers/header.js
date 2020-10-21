@@ -1,4 +1,3 @@
-import update from 'react-addons-update'
 import { MOBILE_DRAWER_STATE_LOAD, MOBILE_DRAWER_STATE_SET } from 'actions/header'
 
 const initialState = {
@@ -13,9 +12,7 @@ export const headerReducer = (state = initialState, action) => {
                
 
         case MOBILE_DRAWER_STATE_SET:
-            return update(state, {
-                $set: { mobileDrawer: action.payload },
-            })
+            return { ...state, mobileDrawer: !state.mobileDrawer }
         
         default: 
             return state
