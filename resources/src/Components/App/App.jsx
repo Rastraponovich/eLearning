@@ -14,8 +14,7 @@ import HeaderContainer from 'containers/HeaderContainer'
 import AlertShow from 'components/AlertShow/AlertShow'
 import LoginPage from 'components/LoginPage/LoginPage'
 
-const drawerWidth = 150
-
+const drawerWidth =  150
 const useStyles = makeStyles((theme) =>({
     main: {
         marginTop: 40,
@@ -56,11 +55,14 @@ const useStyles = makeStyles((theme) =>({
 
 }))
 
+
+
 export default function App(props) {
     const classes = useStyles()
     const [title, setTitle] = React.useState('eLearning')
     const [error, setError] = React.useState(null)
-
+    
+    props.initAction()
     //Refactor
     // handleAlert = (value, type = 'inform', isSelect = false, messageId) => {
     //     this.props.handleShowAlert({ value, type, isSelect, messageId })
@@ -70,10 +72,12 @@ export default function App(props) {
         <Fragment>     
             <HeaderContainer title={ title } />
             <div className={ classes.container }>
+                { props.token === '' ? 
                 <Aside 
                     redirect={ props.redirect }
                     handleMobileDrawerOpen={ props.mobileDrawerStateSetAction } 
-                    mobileDrawer={ props.mobileDrawer } />
+                    mobileDrawer={ props.mobileDrawer } /> : null
+                }
                 <main className={ classes.main }>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/" replace>

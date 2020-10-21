@@ -3,7 +3,8 @@ import { lessonsEntry } from 'helpers/lessonCard'
 
 const initialState = {
     lessons: {},
-    lessonId: ''
+    lessonId: '',
+    
 }
 
 export const lessonReducer = (state = initialState, action) => {

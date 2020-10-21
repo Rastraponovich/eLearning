@@ -7,6 +7,7 @@ import { persistReducer, persistStore } from 'redux-persist'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
 import { alertMiddleWare } from 'middlewares/alertMiddleWare'
+import { initMiddleWare } from 'middlewares/initMiddleWare'
 export const history = createBrowserHistory()
 
 const persistConfig = {
@@ -22,6 +23,7 @@ export const initStore = () => {
         composeWithDevTools(
             applyMiddleware(
                 logger, 
+                initMiddleWare,
                 routerMiddleware(history), 
                 alertMiddleWare,
             )
