@@ -11,11 +11,13 @@ const mapStateToProps = (state, ownProps) => {
     const { profile } = state.profile
     const { mobileDrawer } = state.header
     const { cart } = state.cart
+    const { token } = state.init
 
     return {
         profile,
         mobileDrawer,
-        cart
+        cart, 
+        token
     }
 }
 

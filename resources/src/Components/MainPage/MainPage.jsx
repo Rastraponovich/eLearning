@@ -22,7 +22,7 @@ export default function MainPage(porps) {
     React.useEffect(() => {
         const timer = setInterval(() => {
           setProgress((prevProgress) => (prevProgress >= 100 ? setLoading(false) : prevProgress + 1))
-        }, 70)
+        }, 30)
         
         return () => {
           clearInterval(timer)

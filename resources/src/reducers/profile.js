@@ -2,7 +2,7 @@ import { profile } from 'helpers/profileData'
 import { PROFILE_LOAD, PROFILE_CHANGE_NAME } from 'actions/profile'
 
 const initialState = {
-    profile: [],
+    profile: {},
 }
 
 export const profileReducer = (state = initialState, action) => {

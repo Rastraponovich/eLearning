@@ -1,19 +1,22 @@
-import { INIT, LOGOUT } from 'actions/init'
+import { INIT, LOGOUT, LOGIN } from 'actions/init'
 
 const initialState = {
-    token: ''
+    token: null
 }
 
 export const initReducer = (state = initialState, action) => {
     switch(action.type) {
         
         case INIT: 
-            return { ...state, token: '' }
+            return { ...state, token: null }
 
         case LOGOUT:
-            return { ...state, token: '1' }
+            return { ...state, token: null }
 
-        default: 
+        case LOGIN:
+            return { ...state, token: '1132' }
+        
+            default: 
             return state
     } 
 }  

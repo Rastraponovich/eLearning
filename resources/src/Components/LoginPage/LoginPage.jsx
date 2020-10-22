@@ -50,21 +50,25 @@ const useStyles = makeStyles((theme) => ({
      }
 }))
 
-export default function LoginPage() {
+export default function LoginPage(props) {
     const classes = useStyles()
     const theme = useTheme()
     const [value, setValue] = React.useState(0)
-    const [mail, setMail] = React.useState('')
+    const [email, setEmail] = React.useState('')
     const [firstName, setFirstName] = React.useState('')
     const [lastName, setLastName] = React.useState('')
-
     const [password, setPassword] = React.useState('')
     const [rePassword, setRePassword] = React.useState('')
-
 
     const handleChange = (event, newValue) => {
        setValue(newValue)
     }
+
+    React.useEffect( () => {
+        if (props.token !== null) {
+            props.redirect('/')
+        }
+    })
 
     const handleFirstName = (event) => {
         setFirstName(event.target.value)
@@ -74,8 +78,8 @@ export default function LoginPage() {
         setLastName(event.target.value)
     }
 
-    const handleMail = (event) => {
-        setMail(event.target.value)
+    const handleEmail = (event) => {
+        setEmail(event.target.value)
     }
 
     const handleRePassword = (event) => {
@@ -88,6 +92,12 @@ export default function LoginPage() {
 
     const handleChangeIndex = (index) => {
         setValue(index)
+    }
+
+    const handleLogin = () => {
+        if (password.length > 0 && email.length > 0) {
+            props.handleLogin({ email, password })
+        }
     }
 
     return (
@@ -114,14 +124,14 @@ export default function LoginPage() {
                 <TabPanel value={ value } index={0} dir={ theme.direction }>
                     <form className={ classes.form } >
                         <TextField 
-                            id="mail" 
+                            id="email" 
                             label="Логин" 
                             variant="outlined" 
                             fullWidth 
                             required 
                             size="small"
-                            value={ mail }
-                            onChange={ handleMail }
+                            value={ email }
+                            onChange={ handleEmail }
                         /> 
                         <TextField 
                             id="password" 
@@ -134,8 +144,11 @@ export default function LoginPage() {
                             value={ password }
                             onChange={ handlePassword }
                         /> 
-                        <Button variant="contained" color="primary" fullWidth>
+                        <Button variant="contained" color="primary" fullWidth onClick={ handleLogin }>
                             Вход
+                        </Button>
+                        <Button onClick={ () => props.redirect('/') } variant="contained" color="secondary">
+                            Назад
                         </Button>
                     </form>
 
@@ -170,8 +183,8 @@ export default function LoginPage() {
                             fullWidth 
                             required 
                             size="small"
-                            value={ mail }
-                            onChange={ handleMail }
+                            value={ email }
+                            onChange={ handleEmail }
                         /> 
                         <TextField 
                             id="password" 
@@ -197,6 +210,9 @@ export default function LoginPage() {
                         /> 
                         <Button variant="contained" color="primary" fullWidth>
                             Регистрация
+                        </Button>
+                        <Button onClick={ () => props.redirect('/') } variant="contained" color="secondary">
+                            Назад
                         </Button>
                     </form>
                 </TabPanel>

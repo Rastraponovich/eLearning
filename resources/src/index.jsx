@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { initStore } from './store'
 import { ConnectedRouter } from 'connected-react-router'
 import { history } from './store'
+import './layout/css/style.css'
 
 const { store, persistor } = initStore()
 

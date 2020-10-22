@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import '../../layout/css/style.css'
 import { Container, Breadcrumbs, Typography, Hidden } from '@material-ui/core'
 import LessonList from 'components/LessonList/LessonList'
 import MainPage from 'components/MainPage/MainPage'
@@ -55,14 +54,13 @@ const useStyles = makeStyles((theme) =>({
 
 }))
 
-
-
 export default function App(props) {
     const classes = useStyles()
     const [title, setTitle] = React.useState('eLearning')
     const [error, setError] = React.useState(null)
-    
-    props.initAction()
+    if (props.token === null) {
+        props.initAction()
+    } 
     //Refactor
     // handleAlert = (value, type = 'inform', isSelect = false, messageId) => {
     //     this.props.handleShowAlert({ value, type, isSelect, messageId })
@@ -72,19 +70,19 @@ export default function App(props) {
         <Fragment>     
             <HeaderContainer title={ title } />
             <div className={ classes.container }>
-                { props.token === '' ? 
+                { props.token !== null ? 
                 <Aside 
                     redirect={ props.redirect }
                     handleMobileDrawerOpen={ props.mobileDrawerStateSetAction } 
                     mobileDrawer={ props.mobileDrawer } /> : null
                 }
                 <main className={ classes.main }>
-                    <Breadcrumbs aria-label="breadcrumb">
+                    {/* <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/" replace>
                             <Typography color="textPrimary"> Главная </Typography>
                         </Link>
                         <Typography color="textPrimary">Breadcrumb</Typography>
-                    </Breadcrumbs>
+                    </Breadcrumbs> */}
                     <Container maxWidth="xl">
                         <Switch>
                             <Route path='/' exact >
@@ -98,7 +96,7 @@ export default function App(props) {
                                     handleSelectLesson={ props.selectLessonAction }/>
                             </Route>
                             <Route path='/login' exact >
-                                <LoginPage />
+                                <LoginPage redirect={ props.redirect } token={ props.token } handleLogin={ props.loginAction }/>
                             </Route>
                             <Route path='/lesson/:id' exact>
                                 <LessonContainer />
