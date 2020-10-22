@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         paddingBottom: '2rem',
+        height: '100%'
     },
     paper: {
         height: 140,
@@ -58,9 +59,9 @@ export default function LessonList(props) {
             <Divider className={ classes.spacing } />
             <Autocomplete
                 value={ value }
-                onChange={(event, newValue) => { setValue(newValue) }}
+                onChange={ (event, newValue) => { setValue(newValue) }}
                 inputValue={ inputValue }
-                onInputChange={(event, newInputValue) => { setInputValue(newInputValue) }}
+                onInputChange={ (event, newInputValue) => { setInputValue(newInputValue) }}
                 id="controllable-states-demo"
                 size="small"
                 options={ categoryList }
@@ -68,6 +69,7 @@ export default function LessonList(props) {
                 renderInput={(params) => <TextField { ...params } label="Категории" variant="outlined" />}
             />
             <Divider className={ classes.spacing } />
+            
             <Grid container className={ classes.root } spacing={2}>
                 { lessonsItems.map((item, idx) => item.category === value || value === null ?
                     <Grid  item xs={12} sm={6} md={4} xl={6} key={ idx }>
@@ -82,6 +84,7 @@ export default function LessonList(props) {
                     : null
                     )}
             </Grid>
+
             <Fab className={ classes.fab }>
                 <AddIcon />
             </Fab>

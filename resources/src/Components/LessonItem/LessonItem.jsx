@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { IconButton, Card, CardActionArea, CardMedia, 
-         CardContent, Typography, CardActions, Button, 
+         CardContent, Typography, CardActions, Button, Grow,
          Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -25,6 +25,13 @@ export default function LessonItem(props) {
     const { id, title, content, category, price, cover, lessonId } = props
     const [open, setOpen] = React.useState(false)
     const [deleteDialog, setDeleteDialog] = React.useState(false)
+    const [isRender, setIsRender] = React.useState(false)
+    const [timer, setTimer] = React.useState(500)
+   
+    React.useEffect( () => {
+        setIsRender(true)
+        setTimer((Math.floor(Math.random() * 5) * 100 ))
+    })
 
     const handleOpen = () => {
         setOpen(!open)
@@ -56,9 +63,13 @@ export default function LessonItem(props) {
         props.handleCartAdd(data)
     }
 
+    const handleTimer = () => {
+        const number = (Math.floor(Math.random() * 10) * 1000 )
+    }
     return(
         <>
-        <Card elevation={5} key={ id }>
+        <Grow direction="up" timeout={ timer } in={ isRender }>
+        <Card elevation={5} key={ id } >
             <CardActionArea onClick={ props.modal ? handleClose : handleOpen }>
                 <CardMedia
                     className={ classes.media }
@@ -94,6 +105,7 @@ export default function LessonItem(props) {
                 </IconButton>
             </CardActions>
         </Card>
+        </Grow >
         <Dialog fullWidth onClose={ handleClose } open={ open }>
             <LessonItem { ...props } modal={true} />
         </Dialog>

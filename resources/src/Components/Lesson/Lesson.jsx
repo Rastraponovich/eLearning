@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
-import { Paper, Container, Typography, Card, 
+import { Paper, TextFiled, Typography, Card, CardHeader,
     CardContent, CardMedia, Divider,
     CardActions, Button, Chip, Avatar, IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import CreateIcon from '@material-ui/icons/Create'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Lesson(props) {
     const classes = useStyles()
     const { lesson, deleteLesonAction, lessonId } = props
+    const [isEdit, setIsEdit] = React.useState(false)
+
 
     if (lesson === undefined) {
         return <div>Урок не найден вернитесь на главную!</div>
@@ -39,12 +41,18 @@ export default function Lesson(props) {
         props.redirect('/lessons')
     }
 
+    const handleEdit = () => {
+        setIsEdit(!isEdit)
+    }
+
     return(
         <Card className={ classes.root }>
+            <CardHeader title={ title } action={ 
+                <IconButton aria-label="edit" color="primary" onClick={ handleEdit }>
+                    <CreateIcon />
+                </IconButton> } 
+            />
             <CardContent>
-                <Typography gutterBottom variant="h2" component="h2">
-                    { title }
-                </Typography>
                 <CardMedia
                     component="img"
                     alt="cover_lesson"
@@ -64,9 +72,9 @@ export default function Lesson(props) {
                     <Typography variant="body1" color="textPrimary" component="h3">
                         Описание Урока
                     </Typography>
-                    <Typography variant="body2" color="textPrimary" component="p">
+                    { isEdit ? null : <Typography variant="body2" color="textPrimary" component="p">
                         { content }
-                    </Typography>
+                    </Typography> }
                 </Paper>
                 
             </CardContent>
