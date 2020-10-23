@@ -58,9 +58,13 @@ export default function App(props) {
     const classes = useStyles()
     const [title, setTitle] = React.useState('eLearning')
     const [error, setError] = React.useState(null)
-    if (props.token === null) {
-        props.initAction()
-    } 
+
+    React.useEffect( () => {
+        if (props.token === null) {
+            props.initAction()
+        } 
+    })
+    
     //Refactor
     // handleAlert = (value, type = 'inform', isSelect = false, messageId) => {
     //     this.props.handleShowAlert({ value, type, isSelect, messageId })
@@ -92,12 +96,17 @@ export default function App(props) {
                             <Route path='/lessons' exact >
                                 <LessonList 
                                     handleCartAdd = { props.cartAddAction }
-                                    lessons={ props.lessons } 
+                                    lessonsList={ props.lessonsList } 
                                     handleDeleteItem={ props.deleteLesonAction }
-                                    handleSelectLesson={ props.selectLessonAction }/>
+                                    handleSelectLesson={ props.selectLessonAction } />
                             </Route>
                             <Route path='/login' exact >
-                                <LoginPage redirect={ props.redirect } token={ props.token } handleLogin={ props.loginAction }/>
+                                <LoginPage 
+                                    handleRegistration={ props.registrationAction }
+                                    redirect={ props.redirect } 
+                                    token={ props.token } 
+                                    handleLogin={ props.loginAction }
+                                />
                             </Route>
                             <Route path='/lesson/:id' exact>
                                 <LessonContainer />

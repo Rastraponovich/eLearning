@@ -42,14 +42,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LessonList(props) {
     const classes = useStyles()
-    const { lessons } = props
+    const { lessonsList } = props
     const lessonsItems = []
     const categoryList = ['Первая', 'Вторая', 'Третья', 'Четвертая', 'Прочее']
 
     const [value, setValue] = React.useState(null);
     const [inputValue, setInputValue] = React.useState('');
     
-    for (let [key, value] of Object.entries(lessons)) {
+    for (let [key, value] of Object.entries(lessonsList)) {
         lessonsItems.push(value)
     }
     

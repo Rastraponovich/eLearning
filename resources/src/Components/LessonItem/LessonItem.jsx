@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { IconButton, Card, CardActionArea, CardMedia, 
-         CardContent, Typography, CardActions, Button, Grow,
-         Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
+import { 
+    IconButton, Card, CardActionArea, CardMedia, 
+    CardContent, Typography, CardActions, Button, Grow,
+    Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions 
+} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LessonItem(props) {
     const classes = useStyles()
+    
     const { id, title, content, category, price, cover, lessonId } = props
     const [open, setOpen] = React.useState(false)
     const [deleteDialog, setDeleteDialog] = React.useState(false)
@@ -63,9 +66,7 @@ export default function LessonItem(props) {
         props.handleCartAdd(data)
     }
 
-    const handleTimer = () => {
-        const number = (Math.floor(Math.random() * 10) * 1000 )
-    }
+    
     return(
         <>
         <Grow direction="up" timeout={ timer } in={ isRender }>

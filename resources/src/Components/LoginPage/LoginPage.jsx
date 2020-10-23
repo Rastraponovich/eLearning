@@ -100,6 +100,10 @@ export default function LoginPage(props) {
         }
     }
 
+    const handleSend = () => {
+        props.handleRegistration({ email, firstName, lastName, password })
+    }
+
     return (
         <Container className={classes.root} maxWidth="xs">
             <Paper square>
@@ -208,7 +212,7 @@ export default function LoginPage(props) {
                             value={ rePassword }
                             onChange={ handleRePassword }
                         /> 
-                        <Button variant="contained" color="primary" fullWidth>
+                        <Button variant="contained" color="primary" fullWidth onClick={ handleSend }>
                             Регистрация
                         </Button>
                         <Button onClick={ () => props.redirect('/') } variant="contained" color="secondary">

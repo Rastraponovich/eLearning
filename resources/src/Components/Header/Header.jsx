@@ -113,16 +113,17 @@ export default function Header(props) {
         color="primary"
         >
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={ classes.menuButton }
-            color="inherit"
-            aria-label="open drawer"
-            aria-controls={ mobileMenuId }
-            aria-haspopup="true"
-            onClick={ props.mobileDrawerStateSetAction }>
-            <MenuIcon />
-          </IconButton>
+          { props.token !== null ? 
+            <IconButton
+              edge="start"
+              className={ classes.menuButton }
+              color="inherit"
+              aria-label="open drawer"
+              aria-controls={ mobileMenuId }
+              aria-haspopup="true"
+              onClick={ props.mobileDrawerStateSetAction }>
+              <MenuIcon />
+            </IconButton> : null }
 
           <Typography 
             onClick={ () => props.redirect('/') } 

@@ -2,23 +2,22 @@ import { LESSON_LOAD, LESSON_CREATE, LESSON_DELETE, LESSON_SELECT } from 'action
 import { lessonsEntry } from 'helpers/lessonCard'
 
 const initialState = {
-    lessons: {},
+    lessonsList: {},
     lessonId: '',
-    
 }
 
 export const lessonReducer = (state = initialState, action) => {
     switch(action.type) {
         
         case LESSON_LOAD: 
-            return { ...state, lessons: lessonsEntry }
+            return { ...state, lessonsList: lessonsEntry }
 
         case LESSON_CREATE:
             console.log(action.payload)
             return {
                 ...state,
-                lessons: {
-                    ...state.lessons,
+                lessonsList: {
+                    ...state.lessonsList,
                     [action.payload.data.id]: {
                         ...action.payload.data,
                         author: action.payload.author.firstName + ' ' + action.payload.author.lastName
@@ -32,9 +31,9 @@ export const lessonReducer = (state = initialState, action) => {
             
 
         case LESSON_DELETE:
-            const { [action.payload]: _, ...newLessons } = state.lessons
+            const { [action.payload]: _, ...newLessons } = state.lessonsList
             
-            return { ...state, lessons: newLessons }
+            return { ...state, lessonsList: newLessons }
 
         default: 
             return state

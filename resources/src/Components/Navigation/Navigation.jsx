@@ -24,15 +24,15 @@ export default function Navigation(props) {
     const classes = useStyles()
 
     const navDictMain = [
-        { path: '/', name: 'Главная страница'},
-        { path: '/lessons', name: 'Список уроков'},
-        { path: '/login', name: 'Авторизация'},
-        { path: '/createLesson', name: 'Создание урока'},
+        { path: '/', name: 'Главная страница', role: '' },
+        { path: '/lessons', name: 'Список уроков', role: '' },
+        { path: '/login', name: 'Авторизация', role: '' },
+        { path: '/createLesson', name: 'Создание урока', role: '' },
     ]
 
     const navDictSecond = [
-        { path: '/cabinet', name: 'Личный кабинет'},
-        { path: '/cart', name: 'Корзина'}
+        { path: '/cabinet', name: 'Личный кабинет', role: '' },
+        { path: '/cart', name: 'Корзина', role: '' }
     ]
 
     const renderNavMainList = (value) => (

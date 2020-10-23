@@ -1,8 +1,10 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Paper, TextFiled, Typography, Card, CardHeader,
+import { 
+    Paper, TextFiled, Typography, Card, CardHeader,
     CardContent, CardMedia, Divider,
-    CardActions, Button, Chip, Avatar, IconButton } from '@material-ui/core'
+    CardActions, Button, Chip, Avatar, IconButton 
+} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CreateIcon from '@material-ui/icons/Create'
 

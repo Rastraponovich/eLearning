@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
+import { registrationMiddleWare } from 'middlewares/registrationMiddleWare'
 import { alertMiddleWare } from 'middlewares/alertMiddleWare'
 import { initMiddleWare } from 'middlewares/initMiddleWare'
 export const history = createBrowserHistory()
@@ -13,6 +14,7 @@ export const history = createBrowserHistory()
 const persistConfig = {
     key: 'app',
     storage,
+    whitelist: ['init', 'lessons', 'profile']
 }
 
 export const initStore = () => {
@@ -24,6 +26,7 @@ export const initStore = () => {
             applyMiddleware(
                 logger, 
                 initMiddleWare,
+                registrationMiddleWare,
                 routerMiddleware(history), 
                 alertMiddleWare,
             )
