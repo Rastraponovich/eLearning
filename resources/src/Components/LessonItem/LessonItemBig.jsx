@@ -21,12 +21,22 @@ const useStyles = makeStyles((theme) => ({
     },
     cardAction: {
         width: '100%',
-        padding: theme.spacing(0, 1),
+        // padding: theme.spacing(0, 1),
         justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxWidth: '15%',
+
     },
     cardContent: {
         display: 'flex',
+        justifyContent: 'space-between',
         // flexDirection: 'column'
+    },
+    button: {
+        '&:not(:last-child)': {
+            marginBottom: '1rem',
+        }
     }
   }))
 
@@ -99,21 +109,21 @@ export default function LessonItemBig(props) {
                             цена: { price }
                         </Typography>
                     </CardContent>
-
+                    <CardActions className={ classes.cardAction }>
+                        <Button size="small" color="primary" variant="contained" onClick={ handleCartAdd } className={ classes.button } >
+                            В корзину
+                        </Button>
+                        <Link className="link" to={ `/lesson/${id}` } replace>
+                            <Button onClick={ handleSelectLesson } size="small" variant="contained" color="primary" className={ classes.button }>
+                                Подробнее
+                            </Button>
+                        </Link>
+                        <IconButton aria-label="delete" color="primary" onClick={ handleDialogOpen } className={ classes.button }>
+                            <DeleteIcon />
+                        </IconButton>
+                    </CardActions>
             </CardActionArea>
-            <CardActions className={ classes.cardAction }>
-                <Button size="small" color="primary" variant="contained" onClick={ handleCartAdd } >
-                    В корзину
-                </Button>
-                <Link className="link" to={ `/lesson/${id}` } replace>
-                    <Button onClick={ handleSelectLesson } size="small" variant="contained" color="primary">
-                        Подробнее
-                    </Button>
-                </Link>
-                <IconButton aria-label="delete" color="primary" onClick={ handleDialogOpen }>
-                    <DeleteIcon />
-                </IconButton>
-            </CardActions>
+           
         </Card>
         </Grow >
         <Dialog fullWidth onClose={ handleClose } open={ open }>
