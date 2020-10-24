@@ -1,10 +1,12 @@
 import React from 'react'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Button, } from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Button, Link, } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
 import AuthMenu from './AuthMenu'
+import CollectionsBookmarkOutlinedIcon from '@material-ui/icons/CollectionsBookmarkOutlined'
+import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined'
+import { green, purple, common } from '@material-ui/core/colors'
 
 const drawerWidth = 150
 const mobileDrawerWidth = 275
@@ -21,6 +23,18 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   }, 
+  
+  nav: {
+    display: 'flex',
+    '& button:not(:last-child)':{
+      marginRight: '1rem'
+    },
+
+  },
+
+  navButton: {
+    color: theme.palette.common.white
+  },
 
   appBar: {
     [theme.breakpoints.up('sm')]: {
@@ -42,21 +56,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(grey[200], 0.15),
-    '&:hover': {
-      backgroundColor: fade(grey[400], 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
+  
 
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -109,7 +109,7 @@ export default function Header(props) {
     <div className={ classes.grow }>
       <AppBar 
         position="fixed" 
-        className={ props.token === null ? classes.appBar2 : classes.appBar } 
+        className={ classes.appBar2 } 
         color="primary"
         >
         <Toolbar>
@@ -134,20 +134,22 @@ export default function Header(props) {
               { props.title } 
           </Typography>
 
-        <div className={ classes.search }>
-          <div className={ classes.searchIcon }>
-            <SearchIcon />
-          </div>
+       
+        <div className={ classes.grow } />
+        
+        <nav className={ classes.nav }>
+          <Button className={ classes.navButton } startIcon={ <MenuBookOutlinedIcon /> } size="small" >
+          <Typography variant="body2" component="span">Мои уроки</Typography>
+          </Button>
+          <Button 
+            onClick={ () => props.redirect('/lessons') }
+            className={ classes.navButton } 
+            startIcon={ <CollectionsBookmarkOutlinedIcon /> } 
+            size="small" >
+            <Typography variant="body2" component="span">Каталог</Typography>
+          </Button>
+        </nav> 
 
-          <InputBase
-            placeholder="Поиск.."
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}/>
-            
-        </div>
         <div className={ classes.grow } />
         { props.token !== null ? 
           <AuthMenu 
@@ -172,7 +174,7 @@ export default function Header(props) {
                 color="primary" 
                 variant="contained" 
                 size="small">
-                  Вход / Регистрация
+                  <Typography variant="body2" component="span">Вход / Регистрация</Typography>
                 </Button>
             </div>
           </>

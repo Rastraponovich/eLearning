@@ -20,12 +20,14 @@ const useStyles = makeStyles((theme) =>({
         padding: '1rem',
         position: 'relative',
         width: '100%',
+        boxSizing: 'border-box',
         [theme.breakpoints.up('sm')]: {
             marginTop: 64,
         }
     },
     container: {
         display: 'flex',
+        height: '100%',
         width: '100%',
     },
 
@@ -74,7 +76,7 @@ export default function App(props) {
         <Fragment>     
             <HeaderContainer title={ title } />
             <div className={ classes.container }>
-                { props.token !== null ? 
+                { props.mobileDrawer ? 
                 <Aside 
                     redirect={ props.redirect }
                     handleMobileDrawerOpen={ props.mobileDrawerStateSetAction } 
