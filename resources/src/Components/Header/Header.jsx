@@ -29,9 +29,12 @@ const useStyles = makeStyles((theme) => ({
     },
 
     nav: {
-        display: 'flex',
         '& button:not(:last-child)': {
             marginRight: '1rem',
+        },
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'flex',
         },
     },
 
@@ -113,7 +116,7 @@ export default function Header(props) {
 
                     <div className={classes.grow} />
 
-                    <nav className={(classes.nav, classes.sectionDesktop)}>
+                    <nav className={classes.nav}>
                         <Button
                             className={classes.navButton}
                             startIcon={<MenuBookOutlinedIcon />}

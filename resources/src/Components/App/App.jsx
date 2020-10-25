@@ -17,7 +17,7 @@ const drawerWidth = 150
 const useStyles = makeStyles((theme) => ({
     main: {
         marginTop: 40,
-        padding: '1rem',
+        // padding: '1rem',
         position: 'relative',
         width: '100%',
         boxSizing: 'border-box',
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         display: 'flex',
-        height: '100%',
-        width: '100%',
+        // height: '100%',
+        // width: '100%',
     },
 
     footer: {
@@ -89,70 +89,58 @@ export default function App(props) {
                         </Link>
                         <Typography color="textPrimary">Breadcrumb</Typography>
                     </Breadcrumbs> */}
-                    <Container maxWidth="xl">
-                        <Switch>
-                            <Route path="/" exact>
-                                <MainPage />
-                            </Route>
-                            <Route path="/lessons" exact>
-                                <LessonList
-                                    redirect={props.redirect}
-                                    handleCartAdd={props.cartAddAction}
-                                    lessonsList={props.lessonsList}
-                                    handleDeleteItem={props.deleteLesonAction}
-                                    handleSelectLesson={
-                                        props.selectLessonAction
-                                    }
-                                />
-                            </Route>
-                            <Route path="/login" exact>
-                                <LoginPage
-                                    handleRegistration={
-                                        props.registrationAction
-                                    }
-                                    redirect={props.redirect}
-                                    token={props.token}
-                                    handleLogin={props.loginAction}
-                                />
-                            </Route>
-                            <Route path="/lesson/:id" exact>
-                                <LessonContainer />
-                            </Route>
-                            <Route path="/createLesson" exact>
-                                <CreateLesson
-                                    handleCreateLesson={
-                                        props.handleCreateLesson
-                                    }
-                                    redirect={props.redirect}
-                                />
-                            </Route>
-                            <Route path="/cabinet" exact>
-                                <Cabinet profile={props.profile} />
-                            </Route>
-                            <Route path="/cart" exact>
-                                <Cart
-                                    cart={props.cart}
-                                    handleCartPlusItem={
-                                        props.cartPlusItemAction
-                                    }
-                                    handleCartMinusItem={
-                                        props.cartMinusItemAction
-                                    }
-                                    handleCartRemoveItem={
-                                        props.cartRemoveAction
-                                    }
-                                    hanldeCartDelete={props.cartDeleteAction}
-                                />
-                            </Route>
-                            <Route path="*">
-                                <h2>Error</h2>
-                            </Route>
-                        </Switch>
-                        <AlertShow
-                            popup={props.popup}
-                            hanldeCloseAlert={props.alertCloseInformAction}
-                        />
-                    </Container>
+                    {/* <Container maxWidth="xl" style={{ paddingBottom: '2rem' }}> */}
+                    <Switch>
+                        <Route path="/" exact>
+                            <MainPage />
+                        </Route>
+                        <Route path="/lessons" exact>
+                            <LessonList
+                                redirect={props.redirect}
+                                handleCartAdd={props.cartAddAction}
+                                lessonsList={props.lessonsList}
+                                handleDeleteItem={props.deleteLesonAction}
+                                handleSelectLesson={props.selectLessonAction}
+                            />
+                        </Route>
+                        <Route path="/login" exact>
+                            <LoginPage
+                                handleRegistration={props.registrationAction}
+                                redirect={props.redirect}
+                                token={props.token}
+                                handleLogin={props.loginAction}
+                            />
+                        </Route>
+                        <Route path="/lesson/:id" exact>
+                            <LessonContainer />
+                        </Route>
+                        <Route path="/createLesson" exact>
+                            <CreateLesson
+                                handleCreateLesson={props.handleCreateLesson}
+                                redirect={props.redirect}
+                            />
+                        </Route>
+                        <Route path="/cabinet" exact>
+                            <Cabinet profile={props.profile} />
+                        </Route>
+                        <Route path="/cart" exact>
+                            <Cart
+                                cart={props.cart}
+                                handleCartPlusItem={props.cartPlusItemAction}
+                                handleCartMinusItem={props.cartMinusItemAction}
+                                handleCartRemoveItem={props.cartRemoveAction}
+                                hanldeCartDelete={props.cartDeleteAction}
+                            />
+                        </Route>
+                        <Route path="*">
+                            <h2>Error</h2>
+                        </Route>
+                    </Switch>
+                    <AlertShow
+                        popup={props.popup}
+                        hanldeCloseAlert={props.alertCloseInformAction}
+                    />
+                    {/* </Container> */}
                 </main>
             </div>
             {/* <Hidden xsDown>

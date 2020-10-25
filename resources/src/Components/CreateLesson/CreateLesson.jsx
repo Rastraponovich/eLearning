@@ -195,6 +195,7 @@ export default function CreateLesson(props) {
                                         multiline
                                         variant="outlined"
                                         onChange={handleChangeContent}
+                                        rows={3}
                                         helperText="Введите содержание урока"
                                         required
                                     />
