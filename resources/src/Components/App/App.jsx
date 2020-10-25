@@ -13,8 +13,8 @@ import HeaderContainer from 'containers/HeaderContainer'
 import AlertShow from 'components/AlertShow/AlertShow'
 import LoginPage from 'components/LoginPage/LoginPage'
 
-const drawerWidth =  150
-const useStyles = makeStyles((theme) =>({
+const drawerWidth = 150
+const useStyles = makeStyles((theme) => ({
     main: {
         marginTop: 40,
         padding: '1rem',
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) =>({
         boxSizing: 'border-box',
         [theme.breakpoints.up('sm')]: {
             marginTop: 64,
-        }
+        },
     },
     container: {
         display: 'flex',
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) =>({
         zIndex: 1500,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            '& p':{
+            '& p': {
                 marginLeft: drawerWidth,
-            }
+            },
         },
         backgroundColor: '#f5f5f5',
     },
@@ -49,11 +49,10 @@ const useStyles = makeStyles((theme) =>({
     sectionDesktop: {
         display: 'none',
         [theme.breakpoints.up('sm')]: {
-           display: 'flex',
+            display: 'flex',
         },
     },
     helper: {},
-
 }))
 
 export default function App(props) {
@@ -61,29 +60,29 @@ export default function App(props) {
     const [title, setTitle] = React.useState('eLearning')
     const [error, setError] = React.useState(null)
 
-    React.useEffect( () => {
-        if (props.token === null) {
-            props.initAction()
-        } 
-    })
-    
+    React.useEffect(() => {
+        props.initAction()
+    }, [props.token])
+
     //Refactor
     // handleAlert = (value, type = 'inform', isSelect = false, messageId) => {
     //     this.props.handleShowAlert({ value, type, isSelect, messageId })
     // }
-    
-    return(
-        <Fragment>     
-            <HeaderContainer title={ title } />
-            <div className={ classes.container }>
-                { props.mobileDrawer ? 
-                <Aside 
-                    redirect={ props.redirect }
-                    handleMobileDrawerOpen={ props.mobileDrawerStateSetAction } 
-                    mobileDrawer={ props.mobileDrawer } /> : null
-                }
-                <main className={ classes.main }>
-                    
+
+    return (
+        <Fragment>
+            <HeaderContainer title={title} />
+            <div className={classes.container}>
+                {props.mobileDrawer ? (
+                    <Aside
+                        redirect={props.redirect}
+                        handleMobileDrawerOpen={
+                            props.mobileDrawerStateSetAction
+                        }
+                        mobileDrawer={props.mobileDrawer}
+                    />
+                ) : null}
+                <main className={classes.main}>
                     {/* <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/" replace>
                             <Typography color="textPrimary"> Главная </Typography>
@@ -92,50 +91,67 @@ export default function App(props) {
                     </Breadcrumbs> */}
                     <Container maxWidth="xl">
                         <Switch>
-                            <Route path='/' exact >
+                            <Route path="/" exact>
                                 <MainPage />
                             </Route>
-                            <Route path='/lessons' exact >
-                                <LessonList 
-                                    handleCartAdd = { props.cartAddAction }
-                                    lessonsList={ props.lessonsList } 
-                                    handleDeleteItem={ props.deleteLesonAction }
-                                    handleSelectLesson={ props.selectLessonAction } />
-                            </Route>
-                            <Route path='/login' exact >
-                                <LoginPage 
-                                    handleRegistration={ props.registrationAction }
-                                    redirect={ props.redirect } 
-                                    token={ props.token } 
-                                    handleLogin={ props.loginAction }
+                            <Route path="/lessons" exact>
+                                <LessonList
+                                    redirect={props.redirect}
+                                    handleCartAdd={props.cartAddAction}
+                                    lessonsList={props.lessonsList}
+                                    handleDeleteItem={props.deleteLesonAction}
+                                    handleSelectLesson={
+                                        props.selectLessonAction
+                                    }
                                 />
                             </Route>
-                            <Route path='/lesson/:id' exact>
+                            <Route path="/login" exact>
+                                <LoginPage
+                                    handleRegistration={
+                                        props.registrationAction
+                                    }
+                                    redirect={props.redirect}
+                                    token={props.token}
+                                    handleLogin={props.loginAction}
+                                />
+                            </Route>
+                            <Route path="/lesson/:id" exact>
                                 <LessonContainer />
                             </Route>
-                            <Route path='/createLesson' exact>
-                                <CreateLesson 
-                                    handleCreateLesson={ props.handleCreateLesson } 
-                                    redirect={ props.redirect } />
+                            <Route path="/createLesson" exact>
+                                <CreateLesson
+                                    handleCreateLesson={
+                                        props.handleCreateLesson
+                                    }
+                                    redirect={props.redirect}
+                                />
                             </Route>
-                            <Route path='/cabinet' exact>
-                                <Cabinet profile={ props.profile }/>
+                            <Route path="/cabinet" exact>
+                                <Cabinet profile={props.profile} />
                             </Route>
-                            <Route path='/cart' exact>
-                                <Cart 
-                                    cart={ props.cart } 
-                                    handleCartPlusItem={ props.cartPlusItemAction }
-                                    handleCartMinusItem={ props.cartMinusItemAction }
-                                    handleCartRemoveItem={ props.cartRemoveAction }
-                                    hanldeCartDelete={ props.cartDeleteAction }/>
+                            <Route path="/cart" exact>
+                                <Cart
+                                    cart={props.cart}
+                                    handleCartPlusItem={
+                                        props.cartPlusItemAction
+                                    }
+                                    handleCartMinusItem={
+                                        props.cartMinusItemAction
+                                    }
+                                    handleCartRemoveItem={
+                                        props.cartRemoveAction
+                                    }
+                                    hanldeCartDelete={props.cartDeleteAction}
+                                />
                             </Route>
-                            <Route path='*'>
+                            <Route path="*">
                                 <h2>Error</h2>
                             </Route>
                         </Switch>
-                        <AlertShow 
-                            popup={ props.popup } 
-                            hanldeCloseAlert={ props.alertCloseInformAction } />
+                        <AlertShow
+                            popup={props.popup}
+                            hanldeCloseAlert={props.alertCloseInformAction}
+                        />
                     </Container>
                 </main>
             </div>

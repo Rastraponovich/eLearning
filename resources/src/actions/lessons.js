@@ -9,15 +9,15 @@ export const lessonsLoadAction = () => ({
 
 export const createLessonAction = (data) => ({
     type: LESSON_CREATE,
-    payload: data
+    payload: data,
 })
 
 export const deleteLesonAction = (id) => ({
     type: LESSON_DELETE,
-    payload: id
+    payload: id,
 })
 
 export const selectLessonAction = (id) => ({
     type: LESSON_SELECT,
-    payload: id
+    payload: id,
 })

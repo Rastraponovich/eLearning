@@ -6,5 +6,5 @@ export const profile = {
     lastName: 'Иван',
     avatar: generator.generateRandomAvatar(),
     email: 'ivanov.i@protonmail.com',
-    age: '31'
+    age: '31',
 }

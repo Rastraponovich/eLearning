@@ -22,23 +22,25 @@ export default function AlertShow(props) {
     const [open, setOpen] = React.useState(props.popup.status)
 
     return (
-        <div className={ classes.root }>
-            <Collapse in={ props.popup.status }>
-                <Alert 
-                    variant="filled" 
+        <div className={classes.root}>
+            <Collapse in={props.popup.status}>
+                <Alert
+                    variant="filled"
                     severity="success"
                     action={
                         <IconButton
                             aria-label="close"
                             color="inherit"
                             size="small"
-                            onClick={() => { props.hanldeCloseAlert(false) }}
+                            onClick={() => {
+                                props.hanldeCloseAlert(false)
+                            }}
                         >
                             <CloseIcon fontSize="inherit" />
                         </IconButton>
                     }
-                > 
-                    { props.popup.text }
+                >
+                    {props.popup.text}
                 </Alert>
             </Collapse>
         </div>

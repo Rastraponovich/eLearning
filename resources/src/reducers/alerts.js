@@ -1,13 +1,12 @@
 import { ALERT_LOAD, ALERT_SEND, ALERT_CLOSE } from 'actions/alerts'
 
 const initialState = {
-    popup: []
+    popup: [],
 }
 
 export const alertReducer = (state = initialState, action) => {
-    switch(action.type) {
-        
-        case ALERT_LOAD: 
+    switch (action.type) {
+        case ALERT_LOAD:
             return {
                 ...state,
                 popup: {
@@ -16,25 +15,25 @@ export const alertReducer = (state = initialState, action) => {
                     type: '',
                     id: '',
                     isSelect: false,
-                }
+                },
             }
 
         case ALERT_SEND:
             return { ...state, popup: action.payload }
-        
+
         case ALERT_CLOSE:
-            return { 
+            return {
                 ...state,
                 popup: {
-                        text: '',
-                        status: false,
-                        type: '',
-                        id: '',
-                        isSelect: false,
-                    }
-                }
+                    text: '',
+                    status: false,
+                    type: '',
+                    id: '',
+                    isSelect: false,
+                },
+            }
 
-        default: 
+        default:
             return state
-    } 
-}  
+    }
+}

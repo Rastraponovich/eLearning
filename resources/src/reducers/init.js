@@ -1,16 +1,13 @@
 import { INIT } from 'actions/init'
 
-const initialState = {
-    
-}
+const initialState = {}
 
 export const initReducer = (state = initialState, action) => {
-    switch(action.type) {
-        
-        case INIT: 
+    switch (action.type) {
+        case INIT:
             return { ...state }
 
-        default: 
+        default:
             return state
-    } 
-}  
+    }
+}

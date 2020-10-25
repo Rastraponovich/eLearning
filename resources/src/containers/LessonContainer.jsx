@@ -3,17 +3,21 @@ import { push } from 'connected-react-router'
 import Lesson from 'components/Lesson/Lesson'
 import { lessonsLoadAction, deleteLesonAction } from 'actions/lessons'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     console.log(state)
     const { lessonId, lessonsList } = state.lessons
     const lesson = lessonsList[lessonId]
     return {
         lessonId,
         lessonsList,
-        lesson
+        lesson,
     }
 }
 
-const mapDispatchToProps = { lessonsLoadAction, deleteLesonAction, redirect: push }
+const mapDispatchToProps = {
+    lessonsLoadAction,
+    deleteLesonAction,
+    redirect: push,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lesson)

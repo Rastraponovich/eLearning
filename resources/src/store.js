@@ -14,7 +14,7 @@ export const history = createBrowserHistory()
 const persistConfig = {
     key: 'app',
     storage,
-    whitelist: ['init', 'lessons', 'profile']
+    whitelist: ['init', 'lessons', 'profile'],
 }
 
 export const initStore = () => {
@@ -24,13 +24,13 @@ export const initStore = () => {
         initialStore,
         composeWithDevTools(
             applyMiddleware(
-                logger, 
+                logger,
                 initMiddleWare,
                 registrationMiddleWare,
-                routerMiddleware(history), 
+                routerMiddleware(history),
                 alertMiddleWare,
-            )
-        )
+            ),
+        ),
     )
     const persistor = persistStore(store)
     return { store, persistor }

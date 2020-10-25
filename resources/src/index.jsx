@@ -12,12 +12,12 @@ import { BrowserRouter } from 'react-router-dom'
 const { store, persistor } = initStore()
 
 ReactDOM.render(
-    <Provider store={ store } >
-        <PersistGate persistor={ persistor }> 
-            <ConnectedRouter history={ history }>     
+    <Provider store={store}>
+        <PersistGate persistor={persistor}>
+            <ConnectedRouter history={history}>
                 <AppContainer />
             </ConnectedRouter>
         </PersistGate>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('root'),
 )

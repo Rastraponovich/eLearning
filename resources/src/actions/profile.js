@@ -11,7 +11,7 @@ export const logoutAction = () => ({
 
 export const loginAction = (data) => ({
     type: LOGIN,
-    payload: data
+    payload: data,
 })
 export const profileLoadAction = () => ({
     type: PROFILE_LOAD,
@@ -23,11 +23,10 @@ export const usersLoadAction = () => ({
 
 export const profileChangeNameAction = (name) => ({
     type: PROFILE_CHANGE_NAME,
-    payload: name
+    payload: name,
 })
 
 export const registrationAction = (profileData) => ({
     type: REGISTRATION,
-    payload: profileData
+    payload: profileData,
 })
-

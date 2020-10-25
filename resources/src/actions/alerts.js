@@ -10,21 +10,20 @@ export const alertLoadAction = () => ({
 
 export const alertSendAction = (message) => ({
     type: ALERT_SEND,
-    payload: message
+    payload: message,
 })
 
 export const alertCloseInformAction = (value) => ({
     type: ALERT_CLOSE_INFORM,
-    payload: value
+    payload: value,
 })
 
 export const alertSendInformAction = (message) => ({
     type: ALERT_SEND_INFORM,
-    payload: message
+    payload: message,
 })
 
 export const alertCloseAction = (value) => ({
     type: ALERT_CLOSE,
-    payload: value
-
+    payload: value,
 })
