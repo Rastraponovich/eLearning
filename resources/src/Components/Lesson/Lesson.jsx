@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import SwipeableViews from 'react-swipeable-views'
+import Review from './Review'
 import Rating from '@material-ui/lab/Rating'
 import { nanoid } from 'nanoid'
 import {
@@ -103,8 +104,6 @@ function TabPanel(props) {
     const { children, value, index, ...other } = props
     return <div>sdadssad</div>
 }
-
-function renderReviews() {}
 
 export default function Lesson(props) {
     const classes = useStyles()
@@ -380,9 +379,13 @@ export default function Lesson(props) {
                             </div>
                         </CardContent>
                     </Card>
-                    <TabPanel value={value} index={3} dir={theme.direction}>
-                        Item Four
-                    </TabPanel>
+                    <Review
+                        value={value}
+                        index={3}
+                        dir={theme.direction}
+                        profile={props.profile}
+                        lesson={props.lesson}
+                    ></Review>
                 </SwipeableViews>
             </div>
         </div>
