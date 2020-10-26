@@ -1,29 +1,27 @@
 import { CART_LOAD, CART_ADD, CART_REMOVE, CART_DELETE } from 'actions/cart'
 
 const initialState = {
-    cart: {}
+    cart: {},
 }
 
 export const cartReducer = (state = initialState, action) => {
-    switch(action.type) {
-        
-        case CART_LOAD: 
+    switch (action.type) {
+        case CART_LOAD:
             return { ...state, cart }
-               
 
         case CART_ADD:
             return {
                 ...state,
-                cart: { 
+                cart: {
                     ...state.cart,
-                    [action.payload.id] : { 
+                    [action.payload.id]: {
                         ...state.cart[action.payload.id],
-                        ...action.payload
-                    } 
-                }
+                        ...action.payload,
+                    },
+                },
             }
-        
-        case CART_REMOVE: 
+
+        case CART_REMOVE:
             const { cart } = state
             const { [action.payload]: _, ...newCart } = cart
 
@@ -37,8 +35,8 @@ export const cartReducer = (state = initialState, action) => {
                 ...state,
                 cart: [],
             }
-                
-        default: 
+
+        default:
             return state
-    } 
-}  
+    }
+}

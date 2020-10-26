@@ -5,33 +5,49 @@ export const lessonsEntry = {
     Ukm7SJ: {
         id: 'Ukm7SJ',
         title: 'Урок 1',
+        rating: 1,
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: 31
+        price: 31,
+        author: 'userId',
+        reviews: [],
+        qustions: [],
     },
     dk3t0m: {
         id: 'dk3t0m',
         title: 'Урок 2',
+        rating: 4,
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: 71
+        price: 71,
+        author: 'userId',
+        reviews: [],
+        qustions: [],
     },
     fv1hud: {
         id: 'fv1hud',
         title: 'Урок 3',
+        rating: 4,
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: 0
+        price: 0,
+        author: 'userId',
+        reviews: [],
+        qustions: [],
     },
     tiqD0R: {
         id: 'tiqD0R',
         title: 'Урок 4',
+        rating: 5,
         content: 'Ничего не понятно но очень интернесно',
         cover: generator.generateRandomAvatar(),
         category: 'Прочее',
-        price: 151
-    }
+        price: 151,
+        author: 'userId',
+        reviews: [],
+        qustions: [],
+    },
 }

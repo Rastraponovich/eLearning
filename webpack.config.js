@@ -16,7 +16,7 @@ module.exports = {
             reducers: path.join(__dirname, 'resources/src', 'reducers'),
             containers: path.join(__dirname, 'resources/src', 'containers'),
             middlewares: path.join(__dirname, 'resources/src', 'middlewares'),
-            components: path.join(__dirname, 'resources/src', 'Components'),
+            components: path.join(__dirname, 'resources/src', 'components'),
             helpers: path.join(__dirname, 'resources/src', 'helpers')
         }
     },

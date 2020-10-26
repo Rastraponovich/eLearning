@@ -1,24 +1,33 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { mobileDrawerStateSetAction } from 'actions/header'
-import { profileLoadAction, profileChangeNameAction } from 'actions/profile'
+import {
+    profileLoadAction,
+    profileChangeNameAction,
+    logoutAction,
+    loginAction,
+} from 'actions/profile'
 
 import Header from 'components/Header/Header'
 
-const mapStateToProps = (state, ownProps) => {
-    const { profile } = state.profile
+const mapStateToProps = (state) => {
+    const { profile, token } = state.profile
     const { mobileDrawer } = state.header
     const { cart } = state.cart
 
     return {
         profile,
         mobileDrawer,
-        cart
+        cart,
+        token,
     }
 }
 
-const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({ mobileDrawerStateSetAction, redirect: push, profileChangeNameAction }, dispatch)
+const mapDispatchToProps = {
+    mobileDrawerStateSetAction,
+    redirect: push,
+    profileChangeNameAction,
+    logoutAction,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -2,6 +2,8 @@ export const LESSON_LOAD = 'LESSON_LOAD'
 export const LESSON_DELETE = 'LESSON_DELETE'
 export const LESSON_CREATE = 'LESSON_CREATE'
 export const LESSON_SELECT = 'LESSON_SELECT'
+export const REVIEW_ADD = 'REVIEW_ADD'
+export const REMOVE_REVIEW = 'REMOVE_REVIEW'
 
 export const lessonsLoadAction = () => ({
     type: LESSON_LOAD,
@@ -9,15 +11,25 @@ export const lessonsLoadAction = () => ({
 
 export const createLessonAction = (data) => ({
     type: LESSON_CREATE,
-    payload: data
+    payload: data,
 })
 
 export const deleteLesonAction = (id) => ({
     type: LESSON_DELETE,
-    payload: id
+    payload: id,
 })
 
 export const selectLessonAction = (id) => ({
     type: LESSON_SELECT,
-    payload: id
+    payload: id,
+})
+
+export const addReviewLesson = (data) => ({
+    type: REVIEW_ADD,
+    payload: data,
+})
+
+export const removeReviewLesson = (data) => ({
+    type: REMOVE_REVIEW,
+    payload: data,
 })

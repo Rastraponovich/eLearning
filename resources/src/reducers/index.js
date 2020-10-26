@@ -7,13 +7,13 @@ import { cartReducer } from './cart'
 import { headerReducer } from './header'
 import { initReducer } from './init'
 
-export const createRootReducer = (history) => combineReducers({
-    profile: profileReducer,
-    alert: alertReducer,
-    lessons: lessonReducer,
-    header: headerReducer,
-    cart: cartReducer,
-    init: initReducer,
-    router: connectRouter(history)
-})
-
+export const createRootReducer = (history) =>
+    combineReducers({
+        profile: profileReducer,
+        alert: alertReducer,
+        lessons: lessonReducer,
+        header: headerReducer,
+        cart: cartReducer,
+        init: initReducer,
+        router: connectRouter(history),
+    })
