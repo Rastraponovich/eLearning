@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'LessonController@index')->name('index');
+Route::get('/{param?}', function () {
+    return view('index');
+});
