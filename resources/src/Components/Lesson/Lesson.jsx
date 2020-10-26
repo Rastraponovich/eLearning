@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import SwipeableViews from 'react-swipeable-views'
 import Rating from '@material-ui/lab/Rating'
+import { nanoid } from 'nanoid'
 import {
     Paper,
     TextFiled,
@@ -20,11 +21,13 @@ import {
     Chip,
     Avatar,
     IconButton,
+    TextField,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CreateIcon from '@material-ui/icons/Create'
 import DoneIcon from '@material-ui/icons/Done'
 import InfoIcon from '@material-ui/icons/Info'
+import SendIcon from '@material-ui/icons/Send'
 
 function a11yProps(index) {
     return {
@@ -58,6 +61,32 @@ const useStyles = makeStyles((theme) => ({
     content: {
         padding: theme.spacing(1),
     },
+    reviews: {
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+        justifyContent: 'center',
+        '& > *:not(:last-child)': {
+            marginBottom: theme.spacing(2),
+        },
+    },
+    reviewContent: {
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        '& > *:not(:last-child)': {
+            marginRight: theme.spacing(2),
+        },
+    },
+    reviewsList: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+    },
+    reviewInput: {
+        flexGrow: 1,
+    },
     lessonHeader: {
         position: 'absolute',
         display: 'flex',
@@ -75,12 +104,15 @@ function TabPanel(props) {
     return <div>sdadssad</div>
 }
 
+function renderReviews() {}
+
 export default function Lesson(props) {
     const classes = useStyles()
     const theme = useTheme()
     const { lesson, deleteLesonAction, lessonId, profile } = props
     const [isEdit, setIsEdit] = React.useState(false)
     const [value, setValue] = React.useState(0)
+    const [review, setReview] = React.useState('')
 
     if (lesson === undefined) {
         return <div>Урок не найден вернитесь на главную!</div>
@@ -92,6 +124,36 @@ export default function Lesson(props) {
 
     const handleChangeIndex = (index) => {
         setValue(index)
+    }
+
+    const handleSetReview = () => {
+        const searchReview = props.lesson.reviews.find(
+            (item) =>
+                item.author ===
+                `${props.profile.firstName} ${props.profile.lastName}`,
+        )
+        // if (searchReview) {
+        //     alert('Отзыв уже есть')
+        //     return
+        // } else {
+        props.addReviewLesson({
+            id: props.lessonId,
+            review: {
+                id: nanoid(4),
+                author: `${props.profile.firstName} ${props.profile.lastName}`,
+                text: review,
+                avatar: props.profile.avatar,
+            },
+        })
+        setReview('')
+        // }
+    }
+
+    const handleDeleteReview = (event, id) => {
+        props.removeReviewLesson({
+            lessonId: props.lessonId,
+            reviewId: id,
+        })
     }
 
     const {
@@ -121,6 +183,7 @@ export default function Lesson(props) {
         <div style={{ position: 'relative' }}>
             <Container maxWidth="xl" className={classes.lessonHeader}>
                 <Button
+                    onClick={handleRedirect}
                     variant="text"
                     color="primary"
                     className={classes.navButton}
@@ -179,7 +242,7 @@ export default function Lesson(props) {
                 >
                     <Card
                         className={classes.root}
-                        index={1}
+                        index={0}
                         dir={theme.direction}
                     >
                         <CardContent>
@@ -203,7 +266,7 @@ export default function Lesson(props) {
                     </Card>
                     <Card
                         className={classes.root}
-                        index={2}
+                        index={1}
                         dir={theme.direction}
                     >
                         <CardContent>
@@ -221,9 +284,102 @@ export default function Lesson(props) {
                         </CardContent>
                     </Card>
 
-                    <TabPanel value={value} index={2} dir={theme.direction}>
-                        Item Three
-                    </TabPanel>
+                    <Card
+                        className={classes.root}
+                        index={2}
+                        dir={theme.direction}
+                    >
+                        <CardContent className={classes.reviews}>
+                            <div className={classes.reviewsList}>
+                                <Typography
+                                    variant="h4"
+                                    component="h3"
+                                    style={{ marginBottom: theme.spacing(1) }}
+                                >
+                                    Отзывы
+                                </Typography>
+                                <Divider
+                                    variant="fullWidth"
+                                    orientation="horizontal"
+                                    style={{ marginBottom: theme.spacing(2) }}
+                                />
+                                {props.lesson.reviews.map((item, idx) => (
+                                    <Paper
+                                        key={item.id}
+                                        elevation={2}
+                                        style={{
+                                            marginBottom: theme.spacing(2),
+                                            padding: theme.spacing(1),
+                                            boxSizing: 'border-box',
+                                        }}
+                                    >
+                                        <div className={classes.reviewContent}>
+                                            <Avatar src={item.avatar} />
+                                            <Typography
+                                                variant="body2"
+                                                component="span"
+                                                style={{ flexGrow: 1 }}
+                                            >
+                                                {item.author}: {item.text}
+                                            </Typography>
+                                            {item.author ===
+                                            `${props.profile.firstName} ${props.profile.lastName}` ? (
+                                                <CardActions>
+                                                    <IconButton>
+                                                        <CreateIcon />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        id={item.id}
+                                                        onClick={(event) =>
+                                                            handleDeleteReview(
+                                                                event,
+                                                                item.id,
+                                                            )
+                                                        }
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </CardActions>
+                                            ) : null}
+                                        </div>
+                                    </Paper>
+                                ))}
+                            </div>
+                            {props.lesson.reviews.length > 0 ? (
+                                <Divider
+                                    orientation="horizontal"
+                                    variant="fullWidth"
+                                />
+                            ) : null}
+                            <div className={classes.reviewContent}>
+                                <Avatar src={profile.avatar} />
+                                <TextField
+                                    placeholder={
+                                        props.lesson.reviews.length > 0
+                                            ? 'Оставьте отзыв '
+                                            : 'Станьте первым, кто оставит отзыв об этом уроке!'
+                                    }
+                                    variant="outlined"
+                                    className={classes.reviewInput}
+                                    size="small"
+                                    type="text"
+                                    onKeyPress={(event) => {
+                                        if (event.key === 'Enter') {
+                                            handleSetReview()
+                                        }
+                                    }}
+                                    value={review}
+                                    onChange={(e) => setReview(e.target.value)}
+                                />
+                                <IconButton
+                                    onClick={handleSetReview}
+                                    color="primary"
+                                >
+                                    <SendIcon />
+                                </IconButton>
+                            </div>
+                        </CardContent>
+                    </Card>
                     <TabPanel value={value} index={3} dir={theme.direction}>
                         Item Four
                     </TabPanel>

@@ -3,6 +3,8 @@ import {
     LESSON_CREATE,
     LESSON_DELETE,
     LESSON_SELECT,
+    REVIEW_ADD,
+    REMOVE_REVIEW,
 } from 'actions/lessons'
 import { lessonsEntry } from 'helpers/lessonCard'
 
@@ -41,6 +43,34 @@ export const lessonReducer = (state = initialState, action) => {
 
             return { ...state, lessonsList: newLessons }
 
+        case REVIEW_ADD:
+            return {
+                ...state,
+                lessonsList: {
+                    ...state.lessonsList,
+                    [action.payload.id]: {
+                        ...state.lessonsList[action.payload.id],
+                        reviews: [
+                            ...state.lessonsList[action.payload.id].reviews,
+                            action.payload.review,
+                        ],
+                    },
+                },
+            }
+        case REMOVE_REVIEW:
+            const searchReview = state.lessonsList[
+                action.payload.lessonId
+            ].reviews.filter((item) => item.id !== action.payload.reviewId)
+            return {
+                ...state,
+                lessonsList: {
+                    ...state.lessonsList,
+                    [action.payload.lessonId]: {
+                        ...state.lessonsList[action.payload.lessonId],
+                        reviews: searchReview,
+                    },
+                },
+            }
         default:
             return state
     }

@@ -1,7 +1,12 @@
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import Lesson from 'components/Lesson/Lesson'
-import { lessonsLoadAction, deleteLesonAction } from 'actions/lessons'
+import {
+    lessonsLoadAction,
+    deleteLesonAction,
+    addReviewLesson,
+    removeReviewLesson,
+} from 'actions/lessons'
 
 const mapStateToProps = (state) => {
     console.log(state)
@@ -19,6 +24,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     lessonsLoadAction,
     deleteLesonAction,
+    addReviewLesson,
+    removeReviewLesson,
     redirect: push,
 }
 

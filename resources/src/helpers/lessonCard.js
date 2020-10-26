@@ -11,6 +11,8 @@ export const lessonsEntry = {
         category: 'Прочее',
         price: 31,
         author: 'userId',
+        reviews: [],
+        qustions: [],
     },
     dk3t0m: {
         id: 'dk3t0m',
@@ -21,6 +23,8 @@ export const lessonsEntry = {
         category: 'Прочее',
         price: 71,
         author: 'userId',
+        reviews: [],
+        qustions: [],
     },
     fv1hud: {
         id: 'fv1hud',
@@ -31,6 +35,8 @@ export const lessonsEntry = {
         category: 'Прочее',
         price: 0,
         author: 'userId',
+        reviews: [],
+        qustions: [],
     },
     tiqD0R: {
         id: 'tiqD0R',
@@ -41,5 +47,7 @@ export const lessonsEntry = {
         category: 'Прочее',
         price: 151,
         author: 'userId',
+        reviews: [],
+        qustions: [],
     },
 }
