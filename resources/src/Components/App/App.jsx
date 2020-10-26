@@ -96,6 +96,7 @@ export default function App(props) {
                         </Route>
                         <Route path="/lessons" exact>
                             <LessonList
+                                profile={props.profile}
                                 redirect={props.redirect}
                                 handleCartAdd={props.cartAddAction}
                                 lessonsList={props.lessonsList}

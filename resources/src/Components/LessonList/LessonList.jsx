@@ -3,9 +3,11 @@ import { Grid } from '@material-ui/core'
 import { makeStyles, fade } from '@material-ui/core/styles'
 import {
     Typography,
+    Checkbox,
     Divider,
     Fab,
     InputAdornment,
+    FormControlLabel,
     TextField,
     Input,
     Container,
@@ -16,6 +18,7 @@ import { green } from '@material-ui/core/colors'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { createFilterOptions } from '@material-ui/lab/Autocomplete'
+import { profile } from '../../helpers/profileData'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,13 +58,14 @@ const useStyles = makeStyles((theme) => ({
 export default function LessonList(props) {
     const classes = useStyles()
     const { lessonsList } = props
-    const lessonsItems = []
+    let lessonsItems = []
     const categoryList = ['Первая', 'Вторая', 'Третья', 'Четвертая', 'Прочее']
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(null)
     const [searchValue, setSearchValue] = React.useState(null)
     const [inputValue, setInputValue] = React.useState('')
     const [searchInputValue, setSearchInputValue] = React.useState('')
+    const [checked, setChecked] = React.useState(false)
     const loading = open && lessonsItems.length === 0
 
     const filterOptions = createFilterOptions({
@@ -70,6 +74,10 @@ export default function LessonList(props) {
         limit: 2,
         stringify: (option) => option.title,
     })
+
+    const handleCBChange = (event) => {
+        setChecked(event.target.checked)
+    }
 
     for (let [key, value] of Object.entries(lessonsList)) {
         lessonsItems.push(value)
@@ -102,6 +110,19 @@ export default function LessonList(props) {
                             variant="outlined"
                         />
                     )}
+                />
+                <FormControlLabel
+                    value="end"
+                    control={
+                        <Checkbox
+                            checked={checked}
+                            color="primary"
+                            onChange={handleCBChange}
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />
+                    }
+                    label="Мои уроки"
+                    labelPlacement="end"
                 />
 
                 <Autocomplete

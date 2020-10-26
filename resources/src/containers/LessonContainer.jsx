@@ -6,11 +6,13 @@ import { lessonsLoadAction, deleteLesonAction } from 'actions/lessons'
 const mapStateToProps = (state) => {
     console.log(state)
     const { lessonId, lessonsList } = state.lessons
+    const { profile } = state.profile
     const lesson = lessonsList[lessonId]
     return {
         lessonId,
         lessonsList,
         lesson,
+        profile,
     }
 }
 

@@ -7,4 +7,6 @@ export const profile = {
     avatar: generator.generateRandomAvatar(),
     email: 'ivanov.i@protonmail.com',
     age: '31',
+    availibleLessons: [],
+    myLessons: ['tiqD0R'],
 }

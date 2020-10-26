@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import SwipeableViews from 'react-swipeable-views'
+import Rating from '@material-ui/lab/Rating'
 import {
     Paper,
     TextFiled,
@@ -22,6 +23,8 @@ import {
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CreateIcon from '@material-ui/icons/Create'
+import DoneIcon from '@material-ui/icons/Done'
+import InfoIcon from '@material-ui/icons/Info'
 
 function a11yProps(index) {
     return {
@@ -75,7 +78,7 @@ function TabPanel(props) {
 export default function Lesson(props) {
     const classes = useStyles()
     const theme = useTheme()
-    const { lesson, deleteLesonAction, lessonId } = props
+    const { lesson, deleteLesonAction, lessonId, profile } = props
     const [isEdit, setIsEdit] = React.useState(false)
     const [value, setValue] = React.useState(0)
 
@@ -91,7 +94,16 @@ export default function Lesson(props) {
         setValue(index)
     }
 
-    const { id, category, content, title, price, cover } = lesson
+    const {
+        id,
+        category,
+        content,
+        title,
+        price,
+        cover,
+        rating,
+        author,
+    } = lesson
 
     const handleDeleteLesson = () => {
         deleteLesonAction(lessonId)
@@ -119,7 +131,21 @@ export default function Lesson(props) {
                     {title}
                 </Typography>
                 <Typography variant="body2" component="span" color="secondary">
-                    Завершен
+                    {profile.myLessons.find((item) => item === lesson.id) ? (
+                        <Chip
+                            color="primary"
+                            icon={<DoneIcon />}
+                            label="В моих Уроках"
+                            size="small"
+                        />
+                    ) : (
+                        <Chip
+                            color="primary"
+                            icon={<InfoIcon />}
+                            label="Доступен"
+                            size="small"
+                        />
+                    )}
                 </Typography>
             </Container>
             <CardMedia
@@ -175,20 +201,25 @@ export default function Lesson(props) {
                             )}
                         </CardContent>
                     </Card>
-                    <div>
-                        <Typography>Категория:</Typography>
-                        <Chip
-                            index={1}
-                            dir={theme.direction}
-                            avatar={<Avatar>{category[0]}</Avatar>}
-                            label={category}
-                            className={classes.divider}
-                            color="primary"
-                        />
-                        <Typography>Сложность: 5</Typography>
-                        <Typography>Автор:</Typography>
-                        <Typography>Рейтинг:</Typography>
-                    </div>
+                    <Card
+                        className={classes.root}
+                        index={2}
+                        dir={theme.direction}
+                    >
+                        <CardContent>
+                            <Typography>Категория:</Typography>
+                            <Chip
+                                avatar={<Avatar>{category[0]}</Avatar>}
+                                label={category}
+                                className={classes.divider}
+                                color="primary"
+                            />
+                            <Typography>Сложность: 5</Typography>
+                            <Typography>Автор: {author}</Typography>
+                            <Typography>Рейтинг:</Typography>
+                            <Rating name="read-only" value={rating} readOnly />
+                        </CardContent>
+                    </Card>
 
                     <TabPanel value={value} index={2} dir={theme.direction}>
                         Item Three
