@@ -13,7 +13,7 @@ class CreateLessonsTable extends Migration
      */
     public function up()
     {
-        Schema::table('lessons', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->longText('content');
