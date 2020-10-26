@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Lessons;
+use App\Http\Resources\LessonResource;
+use App\Http\Resources\LessonsResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LessonController extends Controller
 {
@@ -14,7 +17,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+        return new LessonsResource(Lessons::paginate());
     }
 
     /**
@@ -44,9 +47,10 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lessons $lesson)
     {
-        //
+        LessonResource::withoutWrapping();
+        return new LessonResource($lesson);
     }
 
     /**

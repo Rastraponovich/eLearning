@@ -14,6 +14,20 @@ class LessonResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'type' => 'lessons',
+            'id'   => (string)$this->id,
+            'attributes' => [
+                'title' => $this->title,
+                'content' => $this->content,
+                'image' => $this->image,
+                'description' => $this->description,
+                'price' => $this->price,
+            ],
+            // 'relationships' => new LessonRelationshipResource($this),
+            // 'links'         => [
+            //     'self' => route('lessons.show', ['lesson' => $this->id]),
+            // ],
+        ];
     }
 }
