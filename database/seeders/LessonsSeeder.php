@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Faker;
 
 class LessonsSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class LessonsSeeder extends Seeder
                 'image' => $objFaker->imageUrl($width = 640, $height = 480),
                 'description' => $objFaker->realText(mt_rand(50, 100)),
                 'price' => $objFaker->randomNumber($nbDigits = NULL, $strict = false),
+                'author' => $objFaker->sentence($nbWords = 2, $variableNbWords = true),
             ];
         }
 
