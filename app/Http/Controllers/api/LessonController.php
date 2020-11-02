@@ -38,7 +38,11 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lesson = Lessons::create($request->all());
+
+        return (new LessonResource($lesson))
+                ->response()
+                ->setStatusCode(201);
     }
 
     /**
@@ -47,10 +51,9 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Lessons $lesson)
+    public function show($id)
     {
-        LessonResource::withoutWrapping();
-        return new LessonResource($lesson);
+        return new LessonResource(Lessons::findOrFail($id));
     }
 
     /**
@@ -84,6 +87,9 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lesson = Lessons::findOrFail($id);
+        $lesson->delete();
+
+        return response()->json(null, 204);
     }
 }

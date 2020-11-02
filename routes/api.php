@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('lessons', 'Api\LessonController');
+Route::get('/lessons', 'Api\LessonController@index');
+Route::get('/lessons/{id}', 'Api\LessonController@show');
+Route::post('/lessons', 'Api\LessonController@store');
+Route::delete('/lessons/{id}', 'Api\LessonController@destroy');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
