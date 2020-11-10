@@ -18,7 +18,8 @@ Route::get('/lessons', 'Api\LessonController@index');
 Route::get('/lessons/{id}', 'Api\LessonController@show');
 Route::post('/lessons', 'Api\LessonController@store');
 Route::delete('/lessons/{id}', 'Api\LessonController@destroy');
+Route::post('/register', 'Api/RegisterController@create');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
